@@ -83,7 +83,8 @@ void ToDoListModel::toggleTaskStatus(const int &index, const bool &status) {
   DBManager::instance()->updateNoteContent(eventID, status);
   QString noteName = DBManager::instance()->getNoteName(m_noteID);
   Logger::instance().logEvent(Logger::TASK_STATUS_TOGGLED, noteName,
-                              QString::number(status));
+                              modelData.at(index).itemName +
+                                  QString(":%1").arg(status));
   if (index < 0 || index >= modelData.size())
     return;
   modelData[index].completionStatus = status;

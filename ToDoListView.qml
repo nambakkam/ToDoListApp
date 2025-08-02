@@ -32,7 +32,7 @@ Rectangle {
                     model: todoModel
                     delegate: ListDelegate {
                         width: tasksList.width
-                        height: 0.15 * width
+                        height: 60
                         serialNumber: model.id
                         taskName: model.ItemName
                         completionStatus: model.StatusRole

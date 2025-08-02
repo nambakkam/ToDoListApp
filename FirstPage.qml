@@ -65,7 +65,7 @@ Rectangle {
                     model: todoNotesModel
                     delegate: ListDelegate {
                         implicitWidth: notesContainer.width
-                        implicitHeight: notesColumn.height*0.15
+                        height: createNewList.height
                         taskName: model.NoteName
                         showCheckBox: false
                         removeButton.onClicked: {

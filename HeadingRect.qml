@@ -55,7 +55,7 @@ Rectangle {
         Button {
             id: logsButton
             visible: true        // You can toggle this visibility dynamically
-            text: "logs"        // Unicode for a simple left arrow (or use an icon)
+            text: "Logs"        // Unicode for a simple left arrow (or use an icon)
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
             onClicked: {

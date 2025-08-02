@@ -6,6 +6,7 @@ QT += quick sql
 
 SOURCES += \
         dbmanager.cpp \
+        eventlogsmodel.cpp \
         logger.cpp \
         main.cpp \
         todolistmodel.cpp \
@@ -26,6 +27,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     dbmanager.h \
+    eventlogsmodel.h \
     logger.h \
     todolistmodel.h \
     todonotesmodel.h
