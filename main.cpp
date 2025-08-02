@@ -10,11 +10,6 @@ int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
   ToDoListModel todoModel;
   QQmlApplicationEngine engine;
-  todoModel.addItemToList("task1");
-  todoModel.addItemToList("task2");
-  todoModel.addItemToList("task3");
-  todoModel.addItemToList("task3");
-  todoModel.addItemToList("task3");
   engine.rootContext()->setContextProperty("todoModel", &todoModel);
   const QUrl url(QStringLiteral("qrc:/main.qml"));
   QObject::connect(

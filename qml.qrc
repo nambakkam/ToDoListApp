@@ -4,5 +4,10 @@
         <file>ListDelegate.qml</file>
         <file>ToDoListView.qml</file>
         <file>icons/delete.png</file>
+        <file>HeadingRect.qml</file>
+        <file>icons/check-list.png</file>
+        <file>FirstPage.qml</file>
+        <file>ProfileConfirmPopup.qml</file>
+        <file>DeleteConfirmation.qml</file>
     </qresource>
 </RCC>

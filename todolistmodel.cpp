@@ -65,8 +65,8 @@ void ToDoListModel::addItemToList(const QString &data) {
 void ToDoListModel::removeItemFromList(const int &index) {
   if (index < 0 || index >= modelData.size())
     return;
-  beginRemoveRows(QModelIndex(), rowCount(), rowCount());
-  modelData.remove(index);
+  beginRemoveRows(QModelIndex(), index, index);
+  modelData.removeAt(index);
   endRemoveRows();
 }
 
