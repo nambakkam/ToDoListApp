@@ -7,12 +7,6 @@ Rectangle {
     width: parent.width
     height: parent.height
     signal elementClicked();
-    ListModel{
-        id:notesList
-        ListElement{ name:"C++ CheckList" }
-        ListElement{ name:"Java CheckList" }
-        ListElement{ name:"Git Essentials" }
-    }
 
     ColumnLayout{
         id:notesColumn
@@ -63,24 +57,25 @@ Rectangle {
 
             Column {
                 id: notesContainer
-                width: parent.width
+                width: scrollArea.width
                 spacing: 5
 
                 Repeater {
                     id: repeatNotes
-                    model: notesList
-                    Layout.fillWidth: true
+                    model: todoNotesModel
                     delegate: ListDelegate {
                         implicitWidth: notesContainer.width
-                        implicitHeight: 0.2 * width
-                        taskName: model.name
+                        implicitHeight: notesColumn.height*0.15
+                        taskName: model.NoteName
                         showCheckBox: false
                         removeButton.onClicked: {
                             deleteListConfirmation.listIndex = index
-                            deleteListConfirmation.listName = model.name
+                            deleteListConfirmation.listName = model.NoteName
                             deleteListConfirmation.open()
                         }
                         elementMouse.onClicked: {
+                            console.log()
+                            todoModel.setNoteID(model.NoteID)
                             elementClicked()
                         }
                         Layout.fillWidth: true
@@ -97,7 +92,7 @@ Rectangle {
         anchors.centerIn: parent
         saveButtonAlias.onClicked: {
             if (listNameField.text.trim() !== "") {
-                notesList.append({ "name": listNameField.text })
+                todoNotesModel.addNoteToList(listNameField.text.trim())
             }
             nameConfirmationPopup.close()
         }
@@ -108,7 +103,7 @@ Rectangle {
         height: parent.height*0.5
         anchors.centerIn: parent
         onConfirmed: {
-            notesList.remove(deleteListConfirmation.listIndex)
+            todoNotesModel.removeNoteFromList(deleteListConfirmation.listIndex)
             deleteListConfirmation.close()
         }
     }

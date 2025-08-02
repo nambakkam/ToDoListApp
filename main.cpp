@@ -1,4 +1,6 @@
+#include "dbmanager.h"
 #include "todolistmodel.h"
+#include "todonotesmodel.h"
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -8,9 +10,13 @@ int main(int argc, char *argv[]) {
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
   QGuiApplication app(argc, argv);
+  DBManager *dbManager = DBManager::instance();
   ToDoListModel todoModel;
+  TODONotesModel todoNotesModel;
+  todoNotesModel.fetchAllNotesFromDB();
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("todoModel", &todoModel);
+  engine.rootContext()->setContextProperty("todoNotesModel", &todoNotesModel);
   const QUrl url(QStringLiteral("qrc:/main.qml"));
   QObject::connect(
       &engine, &QQmlApplicationEngine::objectCreated, &app,

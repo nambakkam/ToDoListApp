@@ -8,10 +8,12 @@ Rectangle {
     height: parent.height * 0.1
     color: "#7ADAA5"
     property alias backButton: backButton
+    property alias logsButton: logsButton
     RowLayout {
         id: headerLayout
         anchors.fill: parent
         anchors.leftMargin: 0.03*parent.width
+        anchors.rightMargin: 0.03*parent.width
         spacing: parent.width * 0.06
 
         // Back Button
@@ -49,6 +51,16 @@ Rectangle {
                 bold: true
             }
             horizontalAlignment: Text.AlignLeft
+        }
+        Button {
+            id: logsButton
+            visible: true        // You can toggle this visibility dynamically
+            text: "logs"        // Unicode for a simple left arrow (or use an icon)
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignVCenter
+            onClicked: {
+                console.log("logs button clicked")
+            }
         }
     }
 }

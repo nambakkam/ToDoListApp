@@ -14,7 +14,7 @@ class ToDoListModel : public QAbstractListModel {
   Q_OBJECT
 public:
   explicit ToDoListModel(QObject *parent = nullptr);
-  ~ToDoListModel();
+  virtual ~ToDoListModel();
   enum roleEnums { IdRole = Qt::UserRole + 1, ItemNameRole, StatusRole };
   Q_ENUM(roleEnums);
   Q_INVOKABLE virtual int
@@ -30,9 +30,18 @@ public:
 
   Q_INVOKABLE void toggleTaskStatus(const int &index, const bool &status);
 
+  Q_INVOKABLE void fetchListFromDB();
+
+public slots:
+  void setNoteID(const int &val);
+  const int &getNoteID();
+
+signals:
+  void noteIDChanged();
+
 private:
   QVector<listElement> modelData;
-  int modelId;
+  int m_noteID;
 };
 
 #endif // TODOLISTMODEL_H

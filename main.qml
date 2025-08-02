@@ -13,9 +13,14 @@ Window {
             top:parent.top
         }
         backButton{
-            visible: pageSwitcher.currentIndex === 1
+            visible: pageSwitcher.currentIndex !== 0
             onClicked: {
                 pageSwitcher.currentIndex = 0
+            }
+        }
+        logsButton{
+            onClicked: {
+                pageSwitcher.currentIndex = 2
             }
         }
     }
@@ -33,6 +38,10 @@ Window {
             }
         }
         ToDoListView{
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+        LogsPage{
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
