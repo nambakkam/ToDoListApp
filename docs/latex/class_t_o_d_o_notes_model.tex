@@ -1,0 +1,203 @@
+\doxysection{TODONotes\+Model Class Reference}
+\hypertarget{class_t_o_d_o_notes_model}{}\label{class_t_o_d_o_notes_model}\index{TODONotesModel@{TODONotesModel}}
+
+
+Model class for managing a list of TODO notes in a Qt MVC application.  
+
+
+
+
+{\ttfamily \#include $<$todonotesmodel.\+h$>$}
+
+Inheritance diagram for TODONotes\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_t_o_d_o_notes_model}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_t_o_d_o_notes_model_a405945ee184813dd8e9f5e21623f596f}\label{class_t_o_d_o_notes_model_a405945ee184813dd8e9f5e21623f596f} 
+enum {\bfseries role\+Enums} \{ {\bfseries note\+IDRole} = Qt\+::User\+Role + 1
+, {\bfseries Item\+Name\+Role}
+, {\bfseries Time\+Stamp\+Role}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_t_o_d_o_notes_model_a5d1880795ae4d752730ae090100e0252}\label{class_t_o_d_o_notes_model_a5d1880795ae4d752730ae090100e0252} 
+{\bfseries TODONotes\+Model} (QAbstract\+List\+Model \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+\Hypertarget{class_t_o_d_o_notes_model_aed76c05f6ba42169cc2b8b140be242ae}\label{class_t_o_d_o_notes_model_aed76c05f6ba42169cc2b8b140be242ae} 
+{\bfseries Q\+\_\+\+ENUM} (role\+Enums)
+\item 
+virtual Q\+\_\+\+INVOKABLE int \mbox{\hyperlink{class_t_o_d_o_notes_model_a98b3873f888107a4cf7d84c6071af96b}{row\+Count}} (const QModel\+Index \&parent=QModel\+Index()) const override
+\begin{DoxyCompactList}\small\item\em Returns the number of rows in the model. \end{DoxyCompactList}\item 
+virtual Q\+\_\+\+INVOKABLE QVariant \mbox{\hyperlink{class_t_o_d_o_notes_model_a6820a040412a6d6c3499aaf9d8b00b79}{data}} (const QModel\+Index \&index, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Returns the data stored under the given role for the item referred to by the index. \end{DoxyCompactList}\item 
+virtual Q\+\_\+\+INVOKABLE QVariant \mbox{\hyperlink{class_t_o_d_o_notes_model_a56de8aad5dc51e1497c430065e3d4948}{header\+Data}} (int section, Qt\+::\+Orientation orientation, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Returns the data for the given role and section in the header with the specified orientation. \end{DoxyCompactList}\item 
+virtual Q\+\_\+\+INVOKABLE QHash$<$ int, QByte\+Array $>$ \mbox{\hyperlink{class_t_o_d_o_notes_model_aa490f99f9e5ca160c65958d20675a15a}{role\+Names}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a hash mapping custom role integers to their corresponding names for the model. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{class_t_o_d_o_notes_model_af8f4321e42ef557f98c39f9c5640ce0a}{add\+Note\+To\+List}} (const QString \&\mbox{\hyperlink{class_t_o_d_o_notes_model_a6820a040412a6d6c3499aaf9d8b00b79}{data}})
+\begin{DoxyCompactList}\small\item\em Adds a new note to the list and updates the model. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{class_t_o_d_o_notes_model_a8f69b0e0a64ed87033eb1b3c3362f3e1}{remove\+Note\+From\+List}} (const int \&index)
+\begin{DoxyCompactList}\small\item\em Removes a note from the model and the database. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{class_t_o_d_o_notes_model_aabff13ebedf5fde87229f0fe74fe03ee}{fetch\+All\+Notes\+From\+DB}} ()
+\begin{DoxyCompactList}\small\item\em Fetches all notes from the database and updates the model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model class for managing a list of TODO notes in a Qt MVC application. 
+
+This class inherits from QAbstract\+List\+Model and provides an interface for storing, retrieving, and manipulating TODO notes. It supports custom roles for note ID, item name, and timestamp, and exposes methods for adding, removing, and fetching notes.
+
+\begin{DoxyNote}{Note}
+The model uses a QVector of \doxylink{structnotes_element}{notes\+Element} to store its data.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+QAbstract\+List\+Model 
+\end{DoxySeeAlso}
+
+
+\label{doc-func-members}
+\Hypertarget{class_t_o_d_o_notes_model_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_t_o_d_o_notes_model_af8f4321e42ef557f98c39f9c5640ce0a}\index{TODONotesModel@{TODONotesModel}!addNoteToList@{addNoteToList}}
+\index{addNoteToList@{addNoteToList}!TODONotesModel@{TODONotesModel}}
+\doxysubsubsection{\texorpdfstring{addNoteToList()}{addNoteToList()}}
+{\footnotesize\ttfamily \label{class_t_o_d_o_notes_model_af8f4321e42ef557f98c39f9c5640ce0a} 
+void TODONotes\+Model\+::add\+Note\+To\+List (\begin{DoxyParamCaption}\item[{const QString \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Adds a new note to the list and updates the model. 
+
+This function creates a new note with the given data by inserting it into the database. After insertion, it refreshes the model data from the database to reflect the changes. Additionally, it logs the creation event for auditing purposes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The content of the note to be added. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_t_o_d_o_notes_model_a6820a040412a6d6c3499aaf9d8b00b79}\index{TODONotesModel@{TODONotesModel}!data@{data}}
+\index{data@{data}!TODONotesModel@{TODONotesModel}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{class_t_o_d_o_notes_model_a6820a040412a6d6c3499aaf9d8b00b79} 
+QVariant TODONotes\+Model\+::data (\begin{DoxyParamCaption}\item[{const QModel\+Index \&}]{index}{, }\item[{int}]{role}{ = {\ttfamily Qt\+:\+:DisplayRole}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the data stored under the given role for the item referred to by the index. 
+
+This function retrieves the data for a specific row and role from the model. It checks if the index is valid and within bounds, then returns the corresponding value from the \doxylink{structnotes_element}{notes\+Element} item. Supported roles include note\+IDRole, Item\+Name\+Role, and Time\+Stamp\+Role.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The QModel\+Index specifying the row and column of the item. \\
+\hline
+{\em role} & The role for which the data is requested. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+QVariant containing the requested data, or an invalid QVariant if the index is not valid or the role is not recognized. 
+\end{DoxyReturn}
+\Hypertarget{class_t_o_d_o_notes_model_aabff13ebedf5fde87229f0fe74fe03ee}\index{TODONotesModel@{TODONotesModel}!fetchAllNotesFromDB@{fetchAllNotesFromDB}}
+\index{fetchAllNotesFromDB@{fetchAllNotesFromDB}!TODONotesModel@{TODONotesModel}}
+\doxysubsubsection{\texorpdfstring{fetchAllNotesFromDB()}{fetchAllNotesFromDB()}}
+{\footnotesize\ttfamily \label{class_t_o_d_o_notes_model_aabff13ebedf5fde87229f0fe74fe03ee} 
+void TODONotes\+Model\+::fetch\+All\+Notes\+From\+DB (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Fetches all notes from the database and updates the model. 
+
+This method retrieves all notes from the database using \doxylink{class_d_b_manager}{DBManager}, clears the current model data, and repopulates it with the fetched notes. The model is reset before and after the update to ensure proper notification of changes to any attached views. \Hypertarget{class_t_o_d_o_notes_model_a56de8aad5dc51e1497c430065e3d4948}\index{TODONotesModel@{TODONotesModel}!headerData@{headerData}}
+\index{headerData@{headerData}!TODONotesModel@{TODONotesModel}}
+\doxysubsubsection{\texorpdfstring{headerData()}{headerData()}}
+{\footnotesize\ttfamily \label{class_t_o_d_o_notes_model_a56de8aad5dc51e1497c430065e3d4948} 
+QVariant TODONotes\+Model\+::header\+Data (\begin{DoxyParamCaption}\item[{int}]{section}{, }\item[{Qt\+::\+Orientation}]{orientation}{, }\item[{int}]{role}{ = {\ttfamily Qt\+:\+:DisplayRole}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the data for the given role and section in the header with the specified orientation. 
+
+This function provides header data for the model, used by views to display column or row headers. For horizontal orientation and display role, it returns "{}\+Note"{} for the first column. For vertical orientation and display role, it returns the row number (starting from 1). For other roles or sections, it returns an invalid QVariant.
+
+
+\begin{DoxyParams}{Parameters}
+{\em section} & The section of the header (column or row index). \\
+\hline
+{\em orientation} & The orientation of the header (horizontal or vertical). \\
+\hline
+{\em role} & The role for which the data is requested (typically Qt\+::\+Display\+Role). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+QVariant containing the header data, or an invalid QVariant if not applicable. 
+\end{DoxyReturn}
+\Hypertarget{class_t_o_d_o_notes_model_a8f69b0e0a64ed87033eb1b3c3362f3e1}\index{TODONotesModel@{TODONotesModel}!removeNoteFromList@{removeNoteFromList}}
+\index{removeNoteFromList@{removeNoteFromList}!TODONotesModel@{TODONotesModel}}
+\doxysubsubsection{\texorpdfstring{removeNoteFromList()}{removeNoteFromList()}}
+{\footnotesize\ttfamily \label{class_t_o_d_o_notes_model_a8f69b0e0a64ed87033eb1b3c3362f3e1} 
+void TODONotes\+Model\+::remove\+Note\+From\+List (\begin{DoxyParamCaption}\item[{const int \&}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Removes a note from the model and the database. 
+
+This function deletes the note at the specified index from both the internal model data and the persistent database. It also logs the deletion event. The function emits the necessary signals to update any views associated with the model.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the note to be removed. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_t_o_d_o_notes_model_aa490f99f9e5ca160c65958d20675a15a}\index{TODONotesModel@{TODONotesModel}!roleNames@{roleNames}}
+\index{roleNames@{roleNames}!TODONotesModel@{TODONotesModel}}
+\doxysubsubsection{\texorpdfstring{roleNames()}{roleNames()}}
+{\footnotesize\ttfamily \label{class_t_o_d_o_notes_model_aa490f99f9e5ca160c65958d20675a15a} 
+QHash$<$ int, QByte\+Array $>$ TODONotes\+Model\+::role\+Names (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a hash mapping custom role integers to their corresponding names for the model. 
+
+This function defines the role names used in the \doxylink{class_t_o_d_o_notes_model}{TODONotes\+Model}, which are utilized for data retrieval in views and delegates. The roles include\+:
+\begin{DoxyItemize}
+\item note\+IDRole\+: Maps to "{}\+Note\+ID"{}
+\item Item\+Name\+Role\+: Maps to "{}\+Note\+Name"{}
+\item Time\+Stamp\+Role\+: Maps to "{}\+Created\+At"{}
+\end{DoxyItemize}
+
+\begin{DoxyReturn}{Returns}
+QHash$<$int, QByte\+Array$>$ A hash containing the role integer as key and the role name as value. 
+\end{DoxyReturn}
+\Hypertarget{class_t_o_d_o_notes_model_a98b3873f888107a4cf7d84c6071af96b}\index{TODONotesModel@{TODONotesModel}!rowCount@{rowCount}}
+\index{rowCount@{rowCount}!TODONotesModel@{TODONotesModel}}
+\doxysubsubsection{\texorpdfstring{rowCount()}{rowCount()}}
+{\footnotesize\ttfamily \label{class_t_o_d_o_notes_model_a98b3873f888107a4cf7d84c6071af96b} 
+int TODONotes\+Model\+::row\+Count (\begin{DoxyParamCaption}\item[{const QModel\+Index \&}]{parent}{ = {\ttfamily QModelIndex()}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the number of rows in the model. 
+
+This function provides the number of items in the model, which is used by views to determine how many rows to display. If the given parent index is valid, indicating a request for child items, the function returns 0, as this model does not support hierarchical data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent index. If valid, indicates a request for child items. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of rows in the model, or 0 if the parent index is valid. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+todonotesmodel.\+h\item 
+todonotesmodel.\+cpp\end{DoxyCompactItemize}

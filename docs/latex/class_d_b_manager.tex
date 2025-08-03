@@ -1,0 +1,360 @@
+\doxysection{DBManager Class Reference}
+\hypertarget{class_d_b_manager}{}\label{class_d_b_manager}\index{DBManager@{DBManager}}
+
+
+Singleton class for managing database operations related to notes, note contents, and event logs.  
+
+
+
+
+{\ttfamily \#include $<$dbmanager.\+h$>$}
+
+Inheritance diagram for DBManager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d_b_manager}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+QString \mbox{\hyperlink{class_d_b_manager_a7a687d2a54dd11b01ebaac247d93a0eb}{get\+Note\+Name}} (int note\+Id)
+\begin{DoxyCompactList}\small\item\em Retrieves the title of a note from the database by its ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_d_b_manager_a7b5bce45efb19223dec4f1fc23af4418}{open\+DB}} (const QString \&path)
+\begin{DoxyCompactList}\small\item\em Opens a SQLite database at the specified path. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_d_b_manager_afe721525114e57e783060d4b5bb73228}{close\+DB}} ()
+\begin{DoxyCompactList}\small\item\em Closes the database connection if it is currently open. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_d_b_manager_a09b63f14e929d4075151c3a288063e91}{add\+Note}} (const QString \&title)
+\begin{DoxyCompactList}\small\item\em Adds a new note to the database. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b_manager_a2b816b2c678ebf7bc6fb92e4476f2572}{update\+Note\+Title}} (int note\+Id, const QString \&new\+Title)
+\begin{DoxyCompactList}\small\item\em Updates the title of a note in the database. \end{DoxyCompactList}\item 
+QList$<$ QVariant\+Map $>$ \mbox{\hyperlink{class_d_b_manager_aa4afe8807813b2a1f289c4e16d19f9bb}{get\+All\+Notes}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves all notes from the database. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b_manager_a8efa96b379b0bf626a62067db338d920}{delete\+Note}} (int note\+Id)
+\begin{DoxyCompactList}\small\item\em Deletes a note from the database by its ID. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_d_b_manager_aad03a238b4354043b184dd25d0504408}{add\+Note\+Content}} (int note\+Id, const QString \&content)
+\begin{DoxyCompactList}\small\item\em Adds content to a note in the database. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b_manager_a587cfd4f99ccc6191e50f843de46f2c4}{update\+Note\+Content}} (int content\+Id, bool completed)
+\begin{DoxyCompactList}\small\item\em Updates the completion status of a note content in the database. \end{DoxyCompactList}\item 
+QList$<$ QVariant\+Map $>$ \mbox{\hyperlink{class_d_b_manager_a7869f27f2be65f8bd2443cf0aff7a5ef}{get\+Note\+Contents}} (int note\+Id)
+\begin{DoxyCompactList}\small\item\em Retrieves the contents of a specific note from the database. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b_manager_aec1e8970324748b4340f14984ccba7a1}{delete\+Note\+Content}} (int content\+Id)
+\begin{DoxyCompactList}\small\item\em Deletes a note content from the database by its ID. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_d_b_manager_a252c8e39ebbf2e2c08e635c27f457d46}{add\+Event\+Log}} (const QString \&event\+Type, const QString \&event\+Description)
+\begin{DoxyCompactList}\small\item\em Adds a new event log entry to the database. \end{DoxyCompactList}\item 
+QList$<$ QVariant\+Map $>$ \mbox{\hyperlink{class_d_b_manager_a9d41b3732ade65bf4c0a964f18f40c3b}{get\+Event\+Logs}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves all event logs from the database. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d_b_manager_af406e8d2180d6aa4b9adc456a6ea8d91}{delete\+All\+Note\+Contents}} (int note\+ID)
+\begin{DoxyCompactList}\small\item\em Deletes all contents associated with a specific note from the Notes\+Contents table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_d_b_manager}{DBManager}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_d_b_manager_a80f0e49840019b8aaae65759a781f8bd}{instance}} ()
+\begin{DoxyCompactList}\small\item\em Returns the singleton instance of \doxylink{class_d_b_manager}{DBManager}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Singleton class for managing database operations related to notes, note contents, and event logs. 
+
+This class provides an interface to interact with the application\textquotesingle{}s database, including opening/closing the database, performing CRUD operations on notes and their contents, and logging events. It ensures thread safety and uses Qt\textquotesingle{}s SQL module for database access.
+
+\begin{DoxyNote}{Note}
+This class is implemented as a singleton. Use \doxylink{class_d_b_manager_a80f0e49840019b8aaae65759a781f8bd}{DBManager\+::instance()} to access the instance. 
+\end{DoxyNote}
+
+
+\label{doc-func-members}
+\Hypertarget{class_d_b_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_d_b_manager_a252c8e39ebbf2e2c08e635c27f457d46}\index{DBManager@{DBManager}!addEventLog@{addEventLog}}
+\index{addEventLog@{addEventLog}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{addEventLog()}{addEventLog()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a252c8e39ebbf2e2c08e635c27f457d46} 
+int DBManager\+::add\+Event\+Log (\begin{DoxyParamCaption}\item[{const QString \&}]{event\+Type}{, }\item[{const QString \&}]{event\+Description}{}\end{DoxyParamCaption})}
+
+
+
+Adds a new event log entry to the database. 
+
+Inserts a record into the {\ttfamily event\+Logs} table with the specified event type and description.
+
+
+\begin{DoxyParams}{Parameters}
+{\em event\+Type} & The type of the event to log. \\
+\hline
+{\em event\+Description} & A description of the event. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ID of the newly inserted event log entry on success, or -\/1 if the operation fails. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_a09b63f14e929d4075151c3a288063e91}\index{DBManager@{DBManager}!addNote@{addNote}}
+\index{addNote@{addNote}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{addNote()}{addNote()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a09b63f14e929d4075151c3a288063e91} 
+int DBManager\+::add\+Note (\begin{DoxyParamCaption}\item[{const QString \&}]{title}{}\end{DoxyParamCaption})}
+
+
+
+Adds a new note to the database. 
+
+Inserts a note with the specified title into the Notes table. If the insertion is successful, returns the ID of the newly inserted note. If an error occurs during insertion, logs the error and returns -\/1.
+
+
+\begin{DoxyParams}{Parameters}
+{\em title} & The title of the note to be added. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The ID of the newly inserted note, or -\/1 if an error occurred. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_aad03a238b4354043b184dd25d0504408}\index{DBManager@{DBManager}!addNoteContent@{addNoteContent}}
+\index{addNoteContent@{addNoteContent}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{addNoteContent()}{addNoteContent()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_aad03a238b4354043b184dd25d0504408} 
+int DBManager\+::add\+Note\+Content (\begin{DoxyParamCaption}\item[{int}]{note\+Id}{, }\item[{const QString \&}]{content}{}\end{DoxyParamCaption})}
+
+
+
+Adds content to a note in the database. 
+
+Inserts a new entry into the Notes\+Contents table with the specified note ID and content.
+
+
+\begin{DoxyParams}{Parameters}
+{\em note\+Id} & The ID of the note to which the content will be added. \\
+\hline
+{\em content} & The content to be added to the note. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ID of the newly inserted note content on success, or -\/1 if the operation fails. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_afe721525114e57e783060d4b5bb73228}\index{DBManager@{DBManager}!closeDB@{closeDB}}
+\index{closeDB@{closeDB}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{closeDB()}{closeDB()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_afe721525114e57e783060d4b5bb73228} 
+void DBManager\+::close\+DB (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Closes the database connection if it is currently open. 
+
+This function checks if the database is open and closes it to release resources. \Hypertarget{class_d_b_manager_af406e8d2180d6aa4b9adc456a6ea8d91}\index{DBManager@{DBManager}!deleteAllNoteContents@{deleteAllNoteContents}}
+\index{deleteAllNoteContents@{deleteAllNoteContents}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{deleteAllNoteContents()}{deleteAllNoteContents()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_af406e8d2180d6aa4b9adc456a6ea8d91} 
+bool DBManager\+::delete\+All\+Note\+Contents (\begin{DoxyParamCaption}\item[{int}]{note\+ID}{}\end{DoxyParamCaption})}
+
+
+
+Deletes all contents associated with a specific note from the Notes\+Contents table. 
+
+This function executes a SQL DELETE statement to remove all rows in the Notes\+Contents table that are linked to the provided note ID.
+
+
+\begin{DoxyParams}{Parameters}
+{\em note\+ID} & The ID of the note whose contents should be deleted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the deletion was successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_a8efa96b379b0bf626a62067db338d920}\index{DBManager@{DBManager}!deleteNote@{deleteNote}}
+\index{deleteNote@{deleteNote}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{deleteNote()}{deleteNote()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a8efa96b379b0bf626a62067db338d920} 
+bool DBManager\+::delete\+Note (\begin{DoxyParamCaption}\item[{int}]{note\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Deletes a note from the database by its ID. 
+
+This function prepares and executes a SQL DELETE statement to remove the note with the specified note\+Id from the Notes table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em note\+Id} & The unique identifier of the note to be deleted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the note was successfully deleted; false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_aec1e8970324748b4340f14984ccba7a1}\index{DBManager@{DBManager}!deleteNoteContent@{deleteNoteContent}}
+\index{deleteNoteContent@{deleteNoteContent}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{deleteNoteContent()}{deleteNoteContent()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_aec1e8970324748b4340f14984ccba7a1} 
+bool DBManager\+::delete\+Note\+Content (\begin{DoxyParamCaption}\item[{int}]{content\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Deletes a note content from the database by its ID. 
+
+This function prepares and executes a SQL DELETE statement to remove the note content with the specified ID from the Notes\+Contents table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em content\+Id} & The unique identifier of the note content to delete. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the deletion was successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_aa4afe8807813b2a1f289c4e16d19f9bb}\index{DBManager@{DBManager}!getAllNotes@{getAllNotes}}
+\index{getAllNotes@{getAllNotes}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{getAllNotes()}{getAllNotes()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_aa4afe8807813b2a1f289c4e16d19f9bb} 
+QList$<$ QVariant\+Map $>$ DBManager\+::get\+All\+Notes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves all notes from the database. 
+
+Executes a SQL query to select all records from the Notes table, ordered by the creation date in descending order. Each note is represented as a QVariant\+Map containing the note\textquotesingle{}s ID, title, and creation timestamp.
+
+\begin{DoxyReturn}{Returns}
+QList$<$\+QVariant\+Map$>$ A list of notes, where each note is a QVariant\+Map with keys "{}note\+\_\+id"{}, "{}title"{}, and "{}created\+\_\+at"{}. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_a9d41b3732ade65bf4c0a964f18f40c3b}\index{DBManager@{DBManager}!getEventLogs@{getEventLogs}}
+\index{getEventLogs@{getEventLogs}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{getEventLogs()}{getEventLogs()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a9d41b3732ade65bf4c0a964f18f40c3b} 
+QList$<$ QVariant\+Map $>$ DBManager\+::get\+Event\+Logs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves all event logs from the database. 
+
+Executes a SQL query to select all records from the event\+Logs table, ordered by the creation timestamp in descending order. Each record is mapped to a QVariant\+Map containing the following keys\+: "{}id"{}, "{}event\+\_\+type"{}, "{}event\+\_\+description"{}, and "{}created\+\_\+at"{}. The method returns a QList of these QVariant\+Map objects.
+
+\begin{DoxyReturn}{Returns}
+QList$<$\+QVariant\+Map$>$ List of event logs, each represented as a QVariant\+Map. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_a7869f27f2be65f8bd2443cf0aff7a5ef}\index{DBManager@{DBManager}!getNoteContents@{getNoteContents}}
+\index{getNoteContents@{getNoteContents}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{getNoteContents()}{getNoteContents()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a7869f27f2be65f8bd2443cf0aff7a5ef} 
+QList$<$ QVariant\+Map $>$ DBManager\+::get\+Note\+Contents (\begin{DoxyParamCaption}\item[{int}]{note\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Retrieves the contents of a specific note from the database. 
+
+This function queries the Notes\+Contents table for all entries associated with the given note ID, ordered by their creation time in ascending order. Each entry is returned as a QVariant\+Map containing the fields\+: id, note\+\_\+id, content, completed, and created\+\_\+at.
+
+
+\begin{DoxyParams}{Parameters}
+{\em note\+Id} & The ID of the note whose contents are to be retrieved. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+QList$<$\+QVariant\+Map$>$ A list of QVariant\+Map objects, each representing a content entry. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_a7a687d2a54dd11b01ebaac247d93a0eb}\index{DBManager@{DBManager}!getNoteName@{getNoteName}}
+\index{getNoteName@{getNoteName}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{getNoteName}{getNoteName}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a7a687d2a54dd11b01ebaac247d93a0eb} 
+QString DBManager\+::get\+Note\+Name (\begin{DoxyParamCaption}\item[{int}]{note\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Retrieves the title of a note from the database by its ID. 
+
+This method executes a SQL query to fetch the title of the note with the specified note\+Id from the Notes table.
+
+
+\begin{DoxyParams}{Parameters}
+{\em note\+Id} & The unique identifier of the note. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The title of the note as a QString. Returns an empty string if no note is found. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_a80f0e49840019b8aaae65759a781f8bd}\index{DBManager@{DBManager}!instance@{instance}}
+\index{instance@{instance}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a80f0e49840019b8aaae65759a781f8bd} 
+\mbox{\hyperlink{class_d_b_manager}{DBManager}} \texorpdfstring{$\ast$}{*} DBManager\+::instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the singleton instance of \doxylink{class_d_b_manager}{DBManager}. 
+
+This method implements the double-\/checked locking pattern to ensure that only one instance of \doxylink{class_d_b_manager}{DBManager} is created in a thread-\/safe manner. If the instance does not exist, it acquires a mutex lock and creates the instance.
+
+\begin{DoxyReturn}{Returns}
+Pointer to the singleton \doxylink{class_d_b_manager}{DBManager} instance. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_a7b5bce45efb19223dec4f1fc23af4418}\index{DBManager@{DBManager}!openDB@{openDB}}
+\index{openDB@{openDB}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{openDB()}{openDB()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a7b5bce45efb19223dec4f1fc23af4418} 
+bool DBManager\+::open\+DB (\begin{DoxyParamCaption}\item[{const QString \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Opens a SQLite database at the specified path. 
+
+This function attempts to open a SQLite database using the provided file path. If the database is already open, it returns true immediately. If the database cannot be opened, it logs the error and returns false.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The file path to the SQLite database. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the database is successfully opened or already open, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_a587cfd4f99ccc6191e50f843de46f2c4}\index{DBManager@{DBManager}!updateNoteContent@{updateNoteContent}}
+\index{updateNoteContent@{updateNoteContent}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{updateNoteContent()}{updateNoteContent()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a587cfd4f99ccc6191e50f843de46f2c4} 
+bool DBManager\+::update\+Note\+Content (\begin{DoxyParamCaption}\item[{int}]{content\+Id}{, }\item[{bool}]{completed}{}\end{DoxyParamCaption})}
+
+
+
+Updates the completion status of a note content in the database. 
+
+This function sets the \textquotesingle{}completed\textquotesingle{} field for the note content with the specified ID.
+
+
+\begin{DoxyParams}{Parameters}
+{\em content\+Id} & The unique identifier of the note content to update. \\
+\hline
+{\em completed} & The new completion status to set (true for completed, false for not completed). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the update was successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_d_b_manager_a2b816b2c678ebf7bc6fb92e4476f2572}\index{DBManager@{DBManager}!updateNoteTitle@{updateNoteTitle}}
+\index{updateNoteTitle@{updateNoteTitle}!DBManager@{DBManager}}
+\doxysubsubsection{\texorpdfstring{updateNoteTitle()}{updateNoteTitle()}}
+{\footnotesize\ttfamily \label{class_d_b_manager_a2b816b2c678ebf7bc6fb92e4476f2572} 
+bool DBManager\+::update\+Note\+Title (\begin{DoxyParamCaption}\item[{int}]{note\+Id}{, }\item[{const QString \&}]{new\+Title}{}\end{DoxyParamCaption})}
+
+
+
+Updates the title of a note in the database. 
+
+This method updates the title of the note identified by the given note\+Id in the Notes table. The new title is provided as a QString.
+
+
+\begin{DoxyParams}{Parameters}
+{\em note\+Id} & The unique identifier of the note to update. \\
+\hline
+{\em new\+Title} & The new title to set for the note. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the update was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+dbmanager.\+h\item 
+dbmanager.\+cpp\end{DoxyCompactItemize}

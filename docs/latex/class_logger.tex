@@ -1,0 +1,100 @@
+\doxysection{Logger Class Reference}
+\hypertarget{class_logger}{}\label{class_logger}\index{Logger@{Logger}}
+
+
+Singleton class for logging note and task events within the application.  
+
+
+
+
+{\ttfamily \#include $<$logger.\+h$>$}
+
+Inheritance diagram for Logger\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_logger}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_logger_a3368c404814e57897a7278fcbfc14d5b}\label{class_logger_a3368c404814e57897a7278fcbfc14d5b} 
+enum {\bfseries Event\+Type} \{ \newline
+{\bfseries NOTE\+\_\+\+CREATED}
+, {\bfseries NOTE\+\_\+\+DELETED}
+, {\bfseries NOTE\+\_\+\+UPDATED}
+, {\bfseries TASK\+\_\+\+ADDED}
+, \newline
+{\bfseries TASK\+\_\+\+DELETED}
+, {\bfseries TASK\+\_\+\+STATUS\+\_\+\+TOGGLED}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_logger_a233c264892b33b5b4d1fd050886517ec}{log\+Event}} (Event\+Type type, const QString \&note\+Name, const QString \&task\+Name=QString())
+\begin{DoxyCompactList}\small\item\em Logs an event to the database with the specified type and details. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_logger}{Logger}} \& \mbox{\hyperlink{class_logger_a4aa4d7c3b98f6e12e7ea8253da5ea0cd}{instance}} ()
+\begin{DoxyCompactList}\small\item\em Returns the singleton instance of the \doxylink{class_logger}{Logger} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Singleton class for logging note and task events within the application. 
+
+The \doxylink{class_logger}{Logger} class provides functionality to log various events related to notes and tasks, such as creation, deletion, updates, and status changes. It uses Qt\textquotesingle{}s QObject for signal-\/slot capabilities and supports event type enumeration for easy event identification.
+
+Usage\+: \doxylink{class_logger_a4aa4d7c3b98f6e12e7ea8253da5ea0cd}{Logger\+::instance()}.log\+Event(Logger\+::\+NOTE\+\_\+\+CREATED, "{}\+Note\+Name"{});
+
+\begin{DoxyNote}{Note}
+This class follows the singleton pattern. Use \doxylink{class_logger_a4aa4d7c3b98f6e12e7ea8253da5ea0cd}{Logger\+::instance()} to access the logger. 
+\end{DoxyNote}
+
+
+\label{doc-func-members}
+\Hypertarget{class_logger_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_logger_a4aa4d7c3b98f6e12e7ea8253da5ea0cd}\index{Logger@{Logger}!instance@{instance}}
+\index{instance@{instance}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily \label{class_logger_a4aa4d7c3b98f6e12e7ea8253da5ea0cd} 
+\mbox{\hyperlink{class_logger}{Logger}} \& Logger\+::instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the singleton instance of the \doxylink{class_logger}{Logger} class. 
+
+This method ensures that only one instance of \doxylink{class_logger}{Logger} exists throughout the application by using a static local variable. Subsequent calls to this function will return the same \doxylink{class_logger}{Logger} instance.
+
+\begin{DoxyReturn}{Returns}
+Reference to the singleton \doxylink{class_logger}{Logger} instance. 
+\end{DoxyReturn}
+\Hypertarget{class_logger_a233c264892b33b5b4d1fd050886517ec}\index{Logger@{Logger}!logEvent@{logEvent}}
+\index{logEvent@{logEvent}!Logger@{Logger}}
+\doxysubsubsection{\texorpdfstring{logEvent()}{logEvent()}}
+{\footnotesize\ttfamily \label{class_logger_a233c264892b33b5b4d1fd050886517ec} 
+void Logger\+::log\+Event (\begin{DoxyParamCaption}\item[{Event\+Type}]{type}{, }\item[{const QString \&}]{note\+Name}{, }\item[{const QString \&}]{task\+Name}{ = {\ttfamily QString()}}\end{DoxyParamCaption})}
+
+
+
+Logs an event to the database with the specified type and details. 
+
+This function prepares a JSON object containing the note name and, if provided, the task name. It then converts the event type to a string and calls the database manager to add the event log. The result of the operation is output to the debug log.
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of the event to log. \\
+\hline
+{\em note\+Name} & The name of the note associated with the event. \\
+\hline
+{\em task\+Name} & The name of the task associated with the event (optional). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+logger.\+h\item 
+logger.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,264 @@
+\doxysection{To\+Do\+List\+Model Class Reference}
+\hypertarget{class_to_do_list_model}{}\label{class_to_do_list_model}\index{ToDoListModel@{ToDoListModel}}
+
+
+Model class for managing a list of to-\/do items in a Qt MVC application.  
+
+
+
+
+{\ttfamily \#include $<$todolistmodel.\+h$>$}
+
+Inheritance diagram for To\+Do\+List\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_to_do_list_model}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_to_do_list_model_a2920cb3d8652362fed5412953fa82263}\label{class_to_do_list_model_a2920cb3d8652362fed5412953fa82263} 
+enum {\bfseries role\+Enums} \{ {\bfseries Id\+Role} = Qt\+::User\+Role + 1
+, {\bfseries Item\+Name\+Role}
+, {\bfseries Status\+Role}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_to_do_list_model_a2bd9e559704091ab7bae189764a3ce42}{set\+Note\+ID}} (const int \&val)
+\begin{DoxyCompactList}\small\item\em Sets the note ID for the \doxylink{class_to_do_list_model}{To\+Do\+List\+Model}. \end{DoxyCompactList}\item 
+const int \& \mbox{\hyperlink{class_to_do_list_model_ab34de64cb349d03adeaed2aea7cd5885}{get\+Note\+ID}} ()
+\begin{DoxyCompactList}\small\item\em Returns the ID of the current note. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_to_do_list_model_a6a66eac2b5230aaf356803775a7abcdc}\label{class_to_do_list_model_a6a66eac2b5230aaf356803775a7abcdc} 
+void {\bfseries note\+IDChanged} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_to_do_list_model_ae12f6e1a63803669a68f340a3ff2bf82}\label{class_to_do_list_model_ae12f6e1a63803669a68f340a3ff2bf82} 
+{\bfseries To\+Do\+List\+Model} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+\Hypertarget{class_to_do_list_model_a7c03a6db64fe8e671317fba12182a2da}\label{class_to_do_list_model_a7c03a6db64fe8e671317fba12182a2da} 
+{\bfseries Q\+\_\+\+ENUM} (role\+Enums)
+\item 
+virtual Q\+\_\+\+INVOKABLE int \mbox{\hyperlink{class_to_do_list_model_a0b2c18be97e99368072437a76c8f9a25}{row\+Count}} (const QModel\+Index \&parent=QModel\+Index()) const override
+\begin{DoxyCompactList}\small\item\em Returns the number of rows in the model. \end{DoxyCompactList}\item 
+virtual Q\+\_\+\+INVOKABLE QVariant \mbox{\hyperlink{class_to_do_list_model_a92293123fc938b206520355e867eada0}{data}} (const QModel\+Index \&index, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Returns the data stored under the given role for the item referred to by the index. \end{DoxyCompactList}\item 
+virtual Q\+\_\+\+INVOKABLE QVariant \mbox{\hyperlink{class_to_do_list_model_aa7fe89df3ce6cdb28af915d64e711b01}{header\+Data}} (int section, Qt\+::\+Orientation orientation, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Returns the data for the given role and section in the header with the specified orientation. \end{DoxyCompactList}\item 
+virtual Q\+\_\+\+INVOKABLE QHash$<$ int, QByte\+Array $>$ \mbox{\hyperlink{class_to_do_list_model_abb7f0f8d084124e653bea6d6aa61f7a0}{role\+Names}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a hash map of custom role names used in the model. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{class_to_do_list_model_a6826e5fde26804c4ecced50aed9fa42b}{add\+Item\+To\+List}} (const QString \&\mbox{\hyperlink{class_to_do_list_model_a92293123fc938b206520355e867eada0}{data}})
+\begin{DoxyCompactList}\small\item\em Adds a new item to the to-\/do list and updates the model. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{class_to_do_list_model_aff7b16f243e2557dd23611b157595265}{remove\+Item\+From\+List}} (const int \&index)
+\begin{DoxyCompactList}\small\item\em Removes an item from the to-\/do list at the specified index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{class_to_do_list_model_a5666ba48ab7ac4e1e6245f2f6e029bbb}{toggle\+Task\+Status}} (const int \&index, const bool \&status)
+\begin{DoxyCompactList}\small\item\em Toggles the completion status of a task at the specified index. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{class_to_do_list_model_acde7fd6b0f5d32c95b77b3272856929c}{fetch\+List\+From\+DB}} ()
+\begin{DoxyCompactList}\small\item\em Fetches the to-\/do list items from the database and updates the model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model class for managing a list of to-\/do items in a Qt MVC application. 
+
+Inherits from QAbstract\+List\+Model and provides an interface for storing, retrieving, and manipulating to-\/do list items. Supports custom roles for item ID, name, and status. Exposes methods for adding, removing, toggling task status, and fetching data from a database. Integrates with Qt\textquotesingle{}s meta-\/object system for use in QML and signal-\/slot communication.
+
+\begin{DoxyNote}{Note}
+This class is intended to be used as the model in a Model-\/\+View-\/\+Controller (MVC) pattern, typically with a QList\+View or similar view component.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+QAbstract\+List\+Model 
+\end{DoxySeeAlso}
+
+
+\label{doc-func-members}
+\Hypertarget{class_to_do_list_model_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_to_do_list_model_a6826e5fde26804c4ecced50aed9fa42b}\index{ToDoListModel@{ToDoListModel}!addItemToList@{addItemToList}}
+\index{addItemToList@{addItemToList}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{addItemToList()}{addItemToList()}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_a6826e5fde26804c4ecced50aed9fa42b} 
+void To\+Do\+List\+Model\+::add\+Item\+To\+List (\begin{DoxyParamCaption}\item[{const QString \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Adds a new item to the to-\/do list and updates the model. 
+
+This method inserts a new note content into the database for the current note ID, logs the addition event, and refreshes the list from the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The content of the item to be added to the to-\/do list. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_to_do_list_model_a92293123fc938b206520355e867eada0}\index{ToDoListModel@{ToDoListModel}!data@{data}}
+\index{data@{data}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_a92293123fc938b206520355e867eada0} 
+QVariant To\+Do\+List\+Model\+::data (\begin{DoxyParamCaption}\item[{const QModel\+Index \&}]{index}{, }\item[{int}]{role}{ = {\ttfamily Qt\+:\+:DisplayRole}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the data stored under the given role for the item referred to by the index. 
+
+This function retrieves the data for a specific item in the model based on the provided index and role. It supports custom roles such as Id\+Role, Item\+Name\+Role, and Status\+Role, returning the corresponding item properties. If the index is invalid or out of bounds, it returns 0. For unsupported roles, it returns an empty QVariant.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The QModel\+Index identifying the item in the model. \\
+\hline
+{\em role} & The role for which the data is requested. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+QVariant containing the requested data, or an empty QVariant if the role is not supported. 
+\end{DoxyReturn}
+\Hypertarget{class_to_do_list_model_acde7fd6b0f5d32c95b77b3272856929c}\index{ToDoListModel@{ToDoListModel}!fetchListFromDB@{fetchListFromDB}}
+\index{fetchListFromDB@{fetchListFromDB}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{fetchListFromDB()}{fetchListFromDB()}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_acde7fd6b0f5d32c95b77b3272856929c} 
+void To\+Do\+List\+Model\+::fetch\+List\+From\+DB (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Fetches the to-\/do list items from the database and updates the model. 
+
+This function retrieves the list of to-\/do items associated with the current note ID from the database using \doxylink{class_d_b_manager}{DBManager}. It resets the model, clears the existing data, and populates the model with the fetched items. Each item includes its ID, content, and completion status.
+
+The model is reset before and after updating to ensure proper notification of views. \Hypertarget{class_to_do_list_model_ab34de64cb349d03adeaed2aea7cd5885}\index{ToDoListModel@{ToDoListModel}!getNoteID@{getNoteID}}
+\index{getNoteID@{getNoteID}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{getNoteID}{getNoteID}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_ab34de64cb349d03adeaed2aea7cd5885} 
+const int \& To\+Do\+List\+Model\+::get\+Note\+ID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Returns the ID of the current note. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the integer representing the note ID. 
+\end{DoxyReturn}
+\Hypertarget{class_to_do_list_model_aa7fe89df3ce6cdb28af915d64e711b01}\index{ToDoListModel@{ToDoListModel}!headerData@{headerData}}
+\index{headerData@{headerData}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{headerData()}{headerData()}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_aa7fe89df3ce6cdb28af915d64e711b01} 
+QVariant To\+Do\+List\+Model\+::header\+Data (\begin{DoxyParamCaption}\item[{int}]{section}{, }\item[{Qt\+::\+Orientation}]{orientation}{, }\item[{int}]{role}{ = {\ttfamily Qt\+:\+:DisplayRole}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the data for the given role and section in the header with the specified orientation. 
+
+This function provides header data for the model, such as column names or row numbers. For horizontal orientation and display role, it returns "{}\+Task"{} for the first column. For vertical orientation and display role, it returns the row number (1-\/based). For other roles or sections, it returns an invalid QVariant.
+
+
+\begin{DoxyParams}{Parameters}
+{\em section} & The section of the header (column or row index). \\
+\hline
+{\em orientation} & The orientation of the header (horizontal or vertical). \\
+\hline
+{\em role} & The role for which the data is requested (e.\+g., Qt\+::\+Display\+Role). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+QVariant containing the header data, or an invalid QVariant if not applicable. 
+\end{DoxyReturn}
+\Hypertarget{class_to_do_list_model_aff7b16f243e2557dd23611b157595265}\index{ToDoListModel@{ToDoListModel}!removeItemFromList@{removeItemFromList}}
+\index{removeItemFromList@{removeItemFromList}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{removeItemFromList()}{removeItemFromList()}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_aff7b16f243e2557dd23611b157595265} 
+void To\+Do\+List\+Model\+::remove\+Item\+From\+List (\begin{DoxyParamCaption}\item[{const int \&}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Removes an item from the to-\/do list at the specified index. 
+
+This function deletes the note content from the database, logs the deletion event, and removes the item from the internal model data. If the index is out of bounds, the function returns without making any changes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the item to be removed from the list. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_to_do_list_model_abb7f0f8d084124e653bea6d6aa61f7a0}\index{ToDoListModel@{ToDoListModel}!roleNames@{roleNames}}
+\index{roleNames@{roleNames}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{roleNames()}{roleNames()}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_abb7f0f8d084124e653bea6d6aa61f7a0} 
+QHash$<$ int, QByte\+Array $>$ To\+Do\+List\+Model\+::role\+Names (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns a hash map of custom role names used in the model. 
+
+This function provides a mapping between integer role identifiers and their corresponding string names. These roles are used to access specific data fields in the model, such as the item\textquotesingle{}s ID, name, and status.
+
+\begin{DoxyReturn}{Returns}
+QHash$<$int, QByte\+Array$>$ A hash map where the key is the role identifier and the value is the role name. 
+\end{DoxyReturn}
+\Hypertarget{class_to_do_list_model_a0b2c18be97e99368072437a76c8f9a25}\index{ToDoListModel@{ToDoListModel}!rowCount@{rowCount}}
+\index{rowCount@{rowCount}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{rowCount()}{rowCount()}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_a0b2c18be97e99368072437a76c8f9a25} 
+int To\+Do\+List\+Model\+::row\+Count (\begin{DoxyParamCaption}\item[{const QModel\+Index \&}]{parent}{ = {\ttfamily QModelIndex()}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Returns the number of rows in the model. 
+
+This function returns the number of items in the to-\/do list model. If the provided parent index is valid, it returns 0, indicating that this model does not support hierarchical data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent index. Used to support hierarchical models. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of rows in the model. 
+\end{DoxyReturn}
+\Hypertarget{class_to_do_list_model_a2bd9e559704091ab7bae189764a3ce42}\index{ToDoListModel@{ToDoListModel}!setNoteID@{setNoteID}}
+\index{setNoteID@{setNoteID}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{setNoteID}{setNoteID}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_a2bd9e559704091ab7bae189764a3ce42} 
+void To\+Do\+List\+Model\+::set\+Note\+ID (\begin{DoxyParamCaption}\item[{const int \&}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Sets the note ID for the \doxylink{class_to_do_list_model}{To\+Do\+List\+Model}. 
+
+If the provided value is different from the current note ID, updates the note ID and emits the note\+IDChanged() signal.
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The new note ID to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_to_do_list_model_a5666ba48ab7ac4e1e6245f2f6e029bbb}\index{ToDoListModel@{ToDoListModel}!toggleTaskStatus@{toggleTaskStatus}}
+\index{toggleTaskStatus@{toggleTaskStatus}!ToDoListModel@{ToDoListModel}}
+\doxysubsubsection{\texorpdfstring{toggleTaskStatus()}{toggleTaskStatus()}}
+{\footnotesize\ttfamily \label{class_to_do_list_model_a5666ba48ab7ac4e1e6245f2f6e029bbb} 
+void To\+Do\+List\+Model\+::toggle\+Task\+Status (\begin{DoxyParamCaption}\item[{const int \&}]{index}{, }\item[{const bool \&}]{status}{}\end{DoxyParamCaption})}
+
+
+
+Toggles the completion status of a task at the specified index. 
+
+Updates the task\textquotesingle{}s status both in the local model and the database. Logs the status change event and emits a signal to notify views of the data change.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the task in the model. \\
+\hline
+{\em status} & The new completion status to set for the task. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+todolistmodel.\+h\item 
+todolistmodel.\+cpp\end{DoxyCompactItemize}

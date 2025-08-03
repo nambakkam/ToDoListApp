@@ -4,6 +4,20 @@
 #include <QAbstractListModel>
 #include <QDateTime>
 #include <QObject>
+/**
+ * @struct notesElement
+ * @brief Represents a single note item with an identifier, name, and creation timestamp.
+ *
+ * This structure holds the essential information for a note, including its unique ID,
+ * descriptive name, and the time it was created.
+ *
+ * @var notesElement::id
+ *   Unique identifier for the note.
+ * @var notesElement::itemName
+ *   Name or description of the note item.
+ * @var notesElement::creationTime
+ *   Timestamp indicating when the note was created.
+ */
 struct notesElement {
   int id;
   QString itemName;

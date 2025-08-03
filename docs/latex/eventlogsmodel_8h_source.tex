@@ -1,0 +1,39 @@
+\doxysection{eventlogsmodel.\+h}
+\hypertarget{eventlogsmodel_8h_source}{}\label{eventlogsmodel_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ EVENTLOGSMODEL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ EVENTLOGSMODEL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QAbstractListModel>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QList>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <QVariantMap>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }EventLogsModel\ :\ \textcolor{keyword}{public}\ QAbstractListModel\ \{}
+\DoxyCodeLine{00022\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \textcolor{keyword}{enum}\ Roles\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ IdRole\ =\ Qt::UserRole\ +\ 1,}
+\DoxyCodeLine{00026\ \ \ \ \ EventTypeRole,}
+\DoxyCodeLine{00027\ \ \ \ \ NoteNameRole,}
+\DoxyCodeLine{00028\ \ \ \ \ TaskNameRole,}
+\DoxyCodeLine{00029\ \ \ \ \ TimestampRole}
+\DoxyCodeLine{00030\ \ \ \};}
+\DoxyCodeLine{00031\ \ \ Q\_ENUM(Roles)}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keyword}{explicit}\ EventLogsModel(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{comment}{//\ Basic\ overrides}}
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_event_logs_model_a94c2ecaf09022a94d4ca9e1be8b0076b}{rowCount}}(\textcolor{keyword}{const}\ QModelIndex\ \&parent\ =\ QModelIndex())\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00037\ \ \ QVariant\ \mbox{\hyperlink{class_event_logs_model_ae902370ff711ea4f17016adfb27be29c}{data}}(\textcolor{keyword}{const}\ QModelIndex\ \&index,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ role\ =\ Qt::DisplayRole)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00039\ \ \ QHash<int,\ QByteArray>\ \mbox{\hyperlink{class_event_logs_model_a4b3e5760976bd556d64d398cc8ab66a4}{roleNames}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_event_logs_model_a0264d2b21c75a48f7721d7515cc915d7}{refresh}}();\ \textcolor{comment}{//\ To\ reload\ logs}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ QList<QVariantMap>\ m\_logs;}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ EVENTLOGSMODEL\_H}}
+
+\end{DoxyCode}

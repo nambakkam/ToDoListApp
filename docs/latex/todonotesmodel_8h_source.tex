@@ -1,0 +1,40 @@
+\doxysection{todonotesmodel.\+h}
+\hypertarget{todonotesmodel_8h_source}{}\label{todonotesmodel_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TODONOTESMODEL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TODONOTESMODEL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QAbstractListModel>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QDateTime>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structnotes_element}{notesElement}}\ \{}
+\DoxyCodeLine{00022\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structnotes_element_a47aac2dbc7d91a0b40c68a408a4343ce}{id}};}
+\DoxyCodeLine{00023\ \ \ QString\ \mbox{\hyperlink{structnotes_element_a91c7f178e3ed512e66bbb933020d99c6}{itemName}};}
+\DoxyCodeLine{00024\ \ \ QDateTime\ \mbox{\hyperlink{structnotes_element_a968a71e30d096a550ff08c4fdfcd412c}{creationTime}};}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00038\ \textcolor{keyword}{class\ }TODONotesModel\ :\ \textcolor{keyword}{public}\ QAbstractListModel\ \{}
+\DoxyCodeLine{00039\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00040\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{explicit}\ TODONotesModel(QAbstractListModel\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00042\ \ \ \textcolor{keyword}{virtual}\ \string~TODONotesModel();}
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{enum}\ roleEnums\ \{\ noteIDRole\ =\ Qt::UserRole\ +\ 1,\ ItemNameRole,\ TimeStampRole\ \};}
+\DoxyCodeLine{00044\ \ \ Q\_ENUM(roleEnums);}
+\DoxyCodeLine{00045\ \ \ Q\_INVOKABLE\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{class_t_o_d_o_notes_model_a98b3873f888107a4cf7d84c6071af96b}{rowCount}}(\textcolor{keyword}{const}\ QModelIndex\ \&parent\ =\ QModelIndex())\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00047\ \ \ Q\_INVOKABLE\ \textcolor{keyword}{virtual}\ QVariant\ \mbox{\hyperlink{class_t_o_d_o_notes_model_a6820a040412a6d6c3499aaf9d8b00b79}{data}}(\textcolor{keyword}{const}\ QModelIndex\ \&index,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ role\ =\ Qt::DisplayRole)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00049\ \ \ Q\_INVOKABLE\ \textcolor{keyword}{virtual}\ QVariant}
+\DoxyCodeLine{00050\ \ \ \mbox{\hyperlink{class_t_o_d_o_notes_model_a56de8aad5dc51e1497c430065e3d4948}{headerData}}(\textcolor{keywordtype}{int}\ section,\ Qt::Orientation\ orientation,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ role\ =\ Qt::DisplayRole)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00052\ \ \ Q\_INVOKABLE\ \textcolor{keyword}{virtual}\ QHash<int,\ QByteArray>\ \mbox{\hyperlink{class_t_o_d_o_notes_model_aa490f99f9e5ca160c65958d20675a15a}{roleNames}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00053\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_o_d_o_notes_model_af8f4321e42ef557f98c39f9c5640ce0a}{addNoteToList}}(\textcolor{keyword}{const}\ QString\ \&\mbox{\hyperlink{class_t_o_d_o_notes_model_a6820a040412a6d6c3499aaf9d8b00b79}{data}});}
+\DoxyCodeLine{00054\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_o_d_o_notes_model_a8f69b0e0a64ed87033eb1b3c3362f3e1}{removeNoteFromList}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&index);}
+\DoxyCodeLine{00055\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_t_o_d_o_notes_model_aabff13ebedf5fde87229f0fe74fe03ee}{fetchAllNotesFromDB}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00058\ \ \ QVector<notesElement>\ modelData;}
+\DoxyCodeLine{00059\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TODONOTESMODEL\_H}}
+
+\end{DoxyCode}

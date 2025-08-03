@@ -1,0 +1,52 @@
+\doxysection{todolistmodel.\+h}
+\hypertarget{todolistmodel_8h_source}{}\label{todolistmodel_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TODOLISTMODEL\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TODOLISTMODEL\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QAbstractListModel>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <QVector>}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structlist_element}{listElement}}\ \{}
+\DoxyCodeLine{00024\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structlist_element_a8f410f2e5458555b3de3a1bd4b20b8e3}{id}};}
+\DoxyCodeLine{00025\ \ \ QString\ \mbox{\hyperlink{structlist_element_ac85162ea22e57928db235e44a507fc65}{itemName}};}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structlist_element_af9ad0a6ca8aa7a8ed5a8c32267b85b20}{completionStatus}};}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }ToDoListModel\ :\ \textcolor{keyword}{public}\ QAbstractListModel\ \{}
+\DoxyCodeLine{00045\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00046\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \textcolor{keyword}{explicit}\ ToDoListModel(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00048\ \ \ \textcolor{keyword}{virtual}\ \string~ToDoListModel();}
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{enum}\ roleEnums\ \{\ IdRole\ =\ Qt::UserRole\ +\ 1,\ ItemNameRole,\ StatusRole\ \};}
+\DoxyCodeLine{00050\ \ \ Q\_ENUM(roleEnums);}
+\DoxyCodeLine{00051\ \ \ Q\_INVOKABLE\ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00052\ \ \ \mbox{\hyperlink{class_to_do_list_model_a0b2c18be97e99368072437a76c8f9a25}{rowCount}}(\textcolor{keyword}{const}\ QModelIndex\ \&parent\ =\ QModelIndex())\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00053\ \ \ Q\_INVOKABLE\ \textcolor{keyword}{virtual}\ QVariant\ \mbox{\hyperlink{class_to_do_list_model_a92293123fc938b206520355e867eada0}{data}}(\textcolor{keyword}{const}\ QModelIndex\ \&index,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ role\ =\ Qt::DisplayRole)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00055\ \ \ Q\_INVOKABLE\ \textcolor{keyword}{virtual}\ QVariant}
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{class_to_do_list_model_aa7fe89df3ce6cdb28af915d64e711b01}{headerData}}(\textcolor{keywordtype}{int}\ section,\ Qt::Orientation\ orientation,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ role\ =\ Qt::DisplayRole)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00058\ \ \ Q\_INVOKABLE\ \textcolor{keyword}{virtual}\ QHash<int,\ QByteArray>\ \mbox{\hyperlink{class_to_do_list_model_abb7f0f8d084124e653bea6d6aa61f7a0}{roleNames}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00059\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_model_a6826e5fde26804c4ecced50aed9fa42b}{addItemToList}}(\textcolor{keyword}{const}\ QString\ \&\mbox{\hyperlink{class_to_do_list_model_a92293123fc938b206520355e867eada0}{data}});}
+\DoxyCodeLine{00060\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_model_aff7b16f243e2557dd23611b157595265}{removeItemFromList}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&index);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_model_a5666ba48ab7ac4e1e6245f2f6e029bbb}{toggleTaskStatus}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&index,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ \&status);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ Q\_INVOKABLE\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_model_acde7fd6b0f5d32c95b77b3272856929c}{fetchListFromDB}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_to_do_list_model_a2bd9e559704091ab7bae189764a3ce42}{setNoteID}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&val);}
+\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ \&\mbox{\hyperlink{class_to_do_list_model_ab34de64cb349d03adeaed2aea7cd5885}{getNoteID}}();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ signals:}
+\DoxyCodeLine{00071\ \ \ \textcolor{keywordtype}{void}\ noteIDChanged();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ QVector<listElement>\ modelData;}
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{int}\ m\_noteID;}
+\DoxyCodeLine{00076\ \};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TODOLISTMODEL\_H}}
+
+\end{DoxyCode}

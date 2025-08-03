@@ -1,0 +1,55 @@
+\doxysection{dbmanager.\+h}
+\hypertarget{dbmanager_8h_source}{}\label{dbmanager_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ DBMANAGER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ DBMANAGER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <QDebug>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <QMutex>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <QObject>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <QSqlError>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <QSqlQuery>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <QVariant>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <QtSql/QSqlDatabase>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }DBManager\ :\ \textcolor{keyword}{public}\ QObject\ \{}
+\DoxyCodeLine{00023\ \ \ Q\_OBJECT}
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \textcolor{keyword}{static}\ DBManager\ *\mbox{\hyperlink{class_d_b_manager_a80f0e49840019b8aaae65759a781f8bd}{instance}}();}
+\DoxyCodeLine{00026\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_b_manager_a7b5bce45efb19223dec4f1fc23af4418}{openDB}}(\textcolor{keyword}{const}\ QString\ \&path);}
+\DoxyCodeLine{00027\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_d_b_manager_afe721525114e57e783060d4b5bb73228}{closeDB}}();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \textcolor{comment}{//\ Notes\ operations}}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_d_b_manager_a09b63f14e929d4075151c3a288063e91}{addNote}}(\textcolor{keyword}{const}\ QString\ \&title);}
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_b_manager_a2b816b2c678ebf7bc6fb92e4476f2572}{updateNoteTitle}}(\textcolor{keywordtype}{int}\ noteId,\ \textcolor{keyword}{const}\ QString\ \&newTitle);}
+\DoxyCodeLine{00032\ \ \ QList<QVariantMap>\ \mbox{\hyperlink{class_d_b_manager_aa4afe8807813b2a1f289c4e16d19f9bb}{getAllNotes}}();}
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_b_manager_a8efa96b379b0bf626a62067db338d920}{deleteNote}}(\textcolor{keywordtype}{int}\ noteId);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{comment}{//\ NotesContents\ operations}}
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_d_b_manager_aad03a238b4354043b184dd25d0504408}{addNoteContent}}(\textcolor{keywordtype}{int}\ noteId,\ \textcolor{keyword}{const}\ QString\ \&content);}
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_b_manager_a587cfd4f99ccc6191e50f843de46f2c4}{updateNoteContent}}(\textcolor{keywordtype}{int}\ contentId,\ \textcolor{keywordtype}{bool}\ completed);}
+\DoxyCodeLine{00038\ \ \ QList<QVariantMap>\ \mbox{\hyperlink{class_d_b_manager_a7869f27f2be65f8bd2443cf0aff7a5ef}{getNoteContents}}(\textcolor{keywordtype}{int}\ noteId);}
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_b_manager_aec1e8970324748b4340f14984ccba7a1}{deleteNoteContent}}(\textcolor{keywordtype}{int}\ contentId);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{comment}{//\ Event\ logs}}
+\DoxyCodeLine{00042\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_d_b_manager_a252c8e39ebbf2e2c08e635c27f457d46}{addEventLog}}(\textcolor{keyword}{const}\ QString\ \&eventType,\ \textcolor{keyword}{const}\ QString\ \&eventDescription);}
+\DoxyCodeLine{00043\ \ \ QList<QVariantMap>\ \mbox{\hyperlink{class_d_b_manager_a9d41b3732ade65bf4c0a964f18f40c3b}{getEventLogs}}();}
+\DoxyCodeLine{00044\ \ \ \string~DBManager();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_d_b_manager_af406e8d2180d6aa4b9adc456a6ea8d91}{deleteAllNoteContents}}(\textcolor{keywordtype}{int}\ noteID);}
+\DoxyCodeLine{00047\ \textcolor{keyword}{public}\ slots:}
+\DoxyCodeLine{00048\ \ \ QString\ \mbox{\hyperlink{class_d_b_manager_a7a687d2a54dd11b01ebaac247d93a0eb}{getNoteName}}(\textcolor{keywordtype}{int}\ noteId);}
+\DoxyCodeLine{00049\ \textcolor{keyword}{private}\ slots:}
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{bool}\ createTablesFromFile(\textcolor{keyword}{const}\ QString\ \&sqlFilePath);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \textcolor{keyword}{explicit}\ DBManager(QObject\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{static}\ DBManager\ *m\_instance;}
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{static}\ QMutex\ m\_mutex;}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ QSqlDatabase\ m\_db;}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ DBMANAGER\_H}}
+
+\end{DoxyCode}

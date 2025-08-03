@@ -1,0 +1,135 @@
+\doxysection{Event\+Logs\+Model Class Reference}
+\hypertarget{class_event_logs_model}{}\label{class_event_logs_model}\index{EventLogsModel@{EventLogsModel}}
+
+
+Model for representing event logs in a Qt view.  
+
+
+
+
+{\ttfamily \#include $<$eventlogsmodel.\+h$>$}
+
+Inheritance diagram for Event\+Logs\+Model\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_event_logs_model}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_event_logs_model_a1aea45bdf20feb9be48e17a98caed86f}\label{class_event_logs_model_a1aea45bdf20feb9be48e17a98caed86f} 
+enum {\bfseries Roles} \{ \newline
+{\bfseries Id\+Role} = Qt\+::User\+Role + 1
+, {\bfseries Event\+Type\+Role}
+, {\bfseries Note\+Name\+Role}
+, {\bfseries Task\+Name\+Role}
+, \newline
+{\bfseries Timestamp\+Role}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_event_logs_model_afcff2422339f1c5b8c04ae5e8352cc78}\label{class_event_logs_model_afcff2422339f1c5b8c04ae5e8352cc78} 
+{\bfseries Event\+Logs\+Model} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+int \mbox{\hyperlink{class_event_logs_model_a94c2ecaf09022a94d4ca9e1be8b0076b}{row\+Count}} (const QModel\+Index \&parent=QModel\+Index()) const override
+\begin{DoxyCompactList}\small\item\em Returns the number of rows in the model. \end{DoxyCompactList}\item 
+QVariant \mbox{\hyperlink{class_event_logs_model_ae902370ff711ea4f17016adfb27be29c}{data}} (const QModel\+Index \&index, int role=Qt\+::\+Display\+Role) const override
+\begin{DoxyCompactList}\small\item\em Returns the data stored under the given role for the item referred to by the index. \end{DoxyCompactList}\item 
+QHash$<$ int, QByte\+Array $>$ \mbox{\hyperlink{class_event_logs_model_a4b3e5760976bd556d64d398cc8ab66a4}{role\+Names}} () const override
+\begin{DoxyCompactList}\small\item\em Returns a hash mapping custom role identifiers to their names for the model. \end{DoxyCompactList}\item 
+Q\+\_\+\+INVOKABLE void \mbox{\hyperlink{class_event_logs_model_a0264d2b21c75a48f7721d7515cc915d7}{refresh}} ()
+\begin{DoxyCompactList}\small\item\em Refreshes the event logs model by reloading data from the database. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Model for representing event logs in a Qt view. 
+
+This class inherits from QAbstract\+List\+Model and provides a model for storing and displaying event log entries. Each log entry is represented as a QVariant\+Map and contains fields such as ID, event type, note name, task name, and timestamp. The model exposes custom roles for accessing these fields and provides methods for refreshing the log data.
+
+\begin{DoxyNote}{Note}
+This model is intended for use with Qt\textquotesingle{}s Model/\+View framework.
+\end{DoxyNote}
+\begin{DoxySeeAlso}{See also}
+QAbstract\+List\+Model 
+\end{DoxySeeAlso}
+
+
+\label{doc-func-members}
+\Hypertarget{class_event_logs_model_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_event_logs_model_ae902370ff711ea4f17016adfb27be29c}\index{EventLogsModel@{EventLogsModel}!data@{data}}
+\index{data@{data}!EventLogsModel@{EventLogsModel}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{class_event_logs_model_ae902370ff711ea4f17016adfb27be29c} 
+QVariant Event\+Logs\+Model\+::data (\begin{DoxyParamCaption}\item[{const QModel\+Index \&}]{index}{, }\item[{int}]{role}{ = {\ttfamily Qt\+:\+:DisplayRole}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Returns the data stored under the given role for the item referred to by the index. 
+
+This method retrieves data from the internal logs list based on the specified model index and role. It supports custom roles such as Id\+Role, Event\+Type\+Role, Note\+Name\+Role, Task\+Name\+Role, and Timestamp\+Role. For Note\+Name\+Role and Task\+Name\+Role, it parses the "{}event\+\_\+description"{} field as JSON and extracts the respective values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The model index specifying the row of the data to retrieve. \\
+\hline
+{\em role} & The role for which the data is requested. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+QVariant containing the requested data, or an invalid QVariant if the index is invalid or out of range. 
+\end{DoxyReturn}
+\Hypertarget{class_event_logs_model_a0264d2b21c75a48f7721d7515cc915d7}\index{EventLogsModel@{EventLogsModel}!refresh@{refresh}}
+\index{refresh@{refresh}!EventLogsModel@{EventLogsModel}}
+\doxysubsubsection{\texorpdfstring{refresh()}{refresh()}}
+{\footnotesize\ttfamily \label{class_event_logs_model_a0264d2b21c75a48f7721d7515cc915d7} 
+void Event\+Logs\+Model\+::refresh (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Refreshes the event logs model by reloading data from the database. 
+
+This function resets the model and retrieves the latest event logs from the database using \doxylink{class_d_b_manager}{DBManager}. It ensures that the model\textquotesingle{}s data is up-\/to-\/date and notifies any attached views of the change. \Hypertarget{class_event_logs_model_a4b3e5760976bd556d64d398cc8ab66a4}\index{EventLogsModel@{EventLogsModel}!roleNames@{roleNames}}
+\index{roleNames@{roleNames}!EventLogsModel@{EventLogsModel}}
+\doxysubsubsection{\texorpdfstring{roleNames()}{roleNames()}}
+{\footnotesize\ttfamily \label{class_event_logs_model_a4b3e5760976bd556d64d398cc8ab66a4} 
+QHash$<$ int, QByte\+Array $>$ Event\+Logs\+Model\+::role\+Names (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Returns a hash mapping custom role identifiers to their names for the model. 
+
+This function defines the roles used in the \doxylink{class_event_logs_model}{Event\+Logs\+Model}, associating each role\textquotesingle{}s integer identifier with its corresponding name as a QByte\+Array. These roles are used for data retrieval in views and delegates, especially in QML or when using custom models with Qt\textquotesingle{}s Model/\+View framework.
+
+\begin{DoxyReturn}{Returns}
+QHash$<$int, QByte\+Array$>$ A hash containing role identifiers and their names. 
+\end{DoxyReturn}
+\Hypertarget{class_event_logs_model_a94c2ecaf09022a94d4ca9e1be8b0076b}\index{EventLogsModel@{EventLogsModel}!rowCount@{rowCount}}
+\index{rowCount@{rowCount}!EventLogsModel@{EventLogsModel}}
+\doxysubsubsection{\texorpdfstring{rowCount()}{rowCount()}}
+{\footnotesize\ttfamily \label{class_event_logs_model_a94c2ecaf09022a94d4ca9e1be8b0076b} 
+int Event\+Logs\+Model\+::row\+Count (\begin{DoxyParamCaption}\item[{const QModel\+Index \&}]{parent}{ = {\ttfamily QModelIndex()}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Returns the number of rows in the model. 
+
+This function provides the number of event log entries stored in the model. If the given parent index is valid, it returns 0, indicating that this model does not support hierarchical data.
+
+
+\begin{DoxyParams}{Parameters}
+{\em parent} & The parent index. Used to support hierarchical models. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of rows (event logs) in the model. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+eventlogsmodel.\+h\item 
+eventlogsmodel.\+cpp\end{DoxyCompactItemize}

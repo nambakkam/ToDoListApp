@@ -4,6 +4,22 @@
 #include <QAbstractListModel>
 #include <QObject>
 #include <QVector>
+/**
+ * @struct listElement
+ * @brief Represents a single item in the to-do list.
+ *
+ * This structure holds the information for a to-do list element,
+ * including its unique identifier, name, and completion status.
+ *
+ * @var listElement::id
+ * Unique identifier for the to-do list item.
+ *
+ * @var listElement::itemName
+ * Name or description of the to-do list item.
+ *
+ * @var listElement::completionStatus
+ * Indicates whether the item has been completed (true) or not (false).
+ */
 struct listElement {
   int id;
   QString itemName;
