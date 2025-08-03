@@ -10,6 +10,21 @@ struct listElement {
   bool completionStatus;
 };
 
+/**
+ * @class ToDoListModel
+ * @brief Model class for managing a list of to-do items in a Qt MVC application.
+ *
+ * Inherits from QAbstractListModel and provides an interface for storing,
+ * retrieving, and manipulating to-do list items. Supports custom roles for
+ * item ID, name, and status. Exposes methods for adding, removing, toggling
+ * task status, and fetching data from a database. Integrates with Qt's
+ * meta-object system for use in QML and signal-slot communication.
+ *
+ * @note This class is intended to be used as the model in a Model-View-Controller
+ * (MVC) pattern, typically with a QListView or similar view component.
+ *
+ * @see QAbstractListModel
+ */
 class ToDoListModel : public QAbstractListModel {
   Q_OBJECT
 public:

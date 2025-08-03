@@ -7,6 +7,19 @@
 #include <QMetaEnum>
 #include <QObject>
 
+/**
+ * @class Logger
+ * @brief Singleton class for logging note and task events within the application.
+ *
+ * The Logger class provides functionality to log various events related to notes and tasks,
+ * such as creation, deletion, updates, and status changes. It uses Qt's QObject for signal-slot
+ * capabilities and supports event type enumeration for easy event identification.
+ *
+ * Usage:
+ *   Logger::instance().logEvent(Logger::NOTE_CREATED, "NoteName");
+ *
+ * @note This class follows the singleton pattern. Use Logger::instance() to access the logger.
+ */
 class Logger : public QObject {
   Q_OBJECT
 public:

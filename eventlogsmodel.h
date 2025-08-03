@@ -5,6 +5,19 @@
 #include <QList>
 #include <QVariantMap>
 
+/**
+ * @class EventLogsModel
+ * @brief Model for representing event logs in a Qt view.
+ *
+ * This class inherits from QAbstractListModel and provides a model for storing and displaying
+ * event log entries. Each log entry is represented as a QVariantMap and contains fields such as
+ * ID, event type, note name, task name, and timestamp. The model exposes custom roles for
+ * accessing these fields and provides methods for refreshing the log data.
+ *
+ * @note This model is intended for use with Qt's Model/View framework.
+ *
+ * @see QAbstractListModel
+ */
 class EventLogsModel : public QAbstractListModel {
   Q_OBJECT
 public:

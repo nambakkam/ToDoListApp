@@ -2,13 +2,16 @@ import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.15
 
+// Popup for creating a new list
 Popup {
     id: createNewListPopup
     width: parent.width * 0.75
     height: parent.height * 0.4
-    closePolicy: Popup.CloseOnPressOutside
+    closePolicy: Popup.CloseOnPressOutside // Close when clicking outside
     modal: true
     focus: true
+
+    // Expose save button and text field as aliases
     property alias saveButtonAlias: saveButton
     property alias listNameField: listNameInput
 
@@ -23,7 +26,7 @@ Popup {
             anchors.margins: parent.width * 0.05
             spacing: parent.height * 0.05
 
-            // Header
+            // Header text
             Text {
                 text: qsTr("Create New List")
                 font.pixelSize: parent.height * 0.08
@@ -31,7 +34,7 @@ Popup {
                 Layout.alignment: Qt.AlignHCenter
             }
 
-            // Text input field
+            // Input field for list name
             TextField {
                 id: listNameInput
                 placeholderText: "Enter list name"
@@ -46,21 +49,24 @@ Popup {
                 }
             }
 
-            // Buttons Row
+            // Row for Save and Cancel buttons
             RowLayout {
                 Layout.fillWidth: true
                 spacing: parent.width * 0.04
 
+                // Save button
                 Button {
                     id:saveButton
                     text: "Save"
                     Layout.fillWidth: true
                     height: parent.height * 0.15
                     onClicked: {
+                        // Log the entered list name
                         console.log("List Name:", listNameInput.text)
                     }
                 }
 
+                // Cancel button
                 Button {
                     id:cancelButton
                     text: "Cancel"
@@ -71,9 +77,13 @@ Popup {
             }
         }
     }
+
+    // Clear input when popup is closed
     onClosed: {
         listNameInput.text = ""
     }
+
+    // Focus input when popup is opened
     onOpened: {
         listNameInput.forceActiveFocus()
     }

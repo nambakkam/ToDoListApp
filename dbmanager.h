@@ -9,6 +9,16 @@
 #include <QVariant>
 #include <QtSql/QSqlDatabase>
 
+/**
+ * @class DBManager
+ * @brief Singleton class for managing database operations related to notes, note contents, and event logs.
+ *
+ * This class provides an interface to interact with the application's database, including opening/closing the database,
+ * performing CRUD operations on notes and their contents, and logging events. It ensures thread safety and uses Qt's
+ * SQL module for database access.
+ *
+ * @note This class is implemented as a singleton. Use DBManager::instance() to access the instance.
+ */
 class DBManager : public QObject {
   Q_OBJECT
 public:

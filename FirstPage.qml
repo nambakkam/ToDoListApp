@@ -1,3 +1,37 @@
+/*
+    FirstPage.qml
+
+    This QML file defines the main UI for the first page of a notes application using the MVC pattern.
+    It provides the following features:
+
+    - A button to create a new list, which opens a popup for name confirmation.
+    - A scrollable area displaying all existing note lists using a Repeater and custom ListDelegate.
+    - Each note list entry allows for selection (triggers elementClicked signal) and deletion (opens confirmation popup).
+    - Popups for confirming new list creation and list deletion.
+    - Uses QtQuick Controls, Layouts, and custom components for UI structure and interaction.
+
+    Components:
+    - Rectangle: Main container for the page.
+    - ColumnLayout: Organizes the create button and notes list vertically.
+    - ScrollView: Makes the notes list scrollable.
+    - Repeater: Dynamically generates note list entries from the model.
+    - ProfileConfirmPopup: Popup for entering a new list name.
+    - DeleteConfirmation: Popup for confirming list deletion.
+
+    Signals:
+    - elementClicked: Emitted when a note list entry is selected.
+
+    Models:
+    - todoNotesModel: Provides data for the note lists.
+    - todoModel: Used to set the current note ID.
+
+    Custom Delegates:
+    - ListDelegate: Represents each note list entry with options to select or delete.
+
+    Usage:
+    - Click "Create New List" to add a new note list.
+    - Scroll through existing lists and select or delete them as needed.
+*/
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15

@@ -9,6 +9,18 @@ struct notesElement {
   QString itemName;
   QDateTime creationTime;
 };
+/**
+ * @class TODONotesModel
+ * @brief Model class for managing a list of TODO notes in a Qt MVC application.
+ *
+ * This class inherits from QAbstractListModel and provides an interface for storing,
+ * retrieving, and manipulating TODO notes. It supports custom roles for note ID, item name,
+ * and timestamp, and exposes methods for adding, removing, and fetching notes.
+ *
+ * @note The model uses a QVector of notesElement to store its data.
+ *
+ * @see QAbstractListModel
+ */
 class TODONotesModel : public QAbstractListModel {
   Q_OBJECT
 public:
