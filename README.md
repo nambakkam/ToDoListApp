@@ -6,6 +6,11 @@ A hobby ToDo List application built with Qt, QML, and C++, implementing MVC and 
 
 This project is a hobby application developed to demonstrate the practical implementation of software design patterns while creating a functional ToDo List manager. The application leverages Qt's powerful framework along with QML for the user interface and C++ for the backend logic.
 
+![First Page](/AppScreenShots/FirstScreen.jpg)
+![List Page](/AppScreenShots/ListScreen.jpg)
+![Logs Page](/AppScreenShots/LogScreen.jpg)
+![Logs Page](/AppScreenShots/ConfirmationScreen.jpg)
+
 ## Technologies Used
 
 - C++ & QT
