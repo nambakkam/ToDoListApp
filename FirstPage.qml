@@ -1,5 +1,6 @@
-/*
-    FirstPage.qml
+/**
+    @file FirstPage.qml
+    @brief Home page: the lists (code term: notes) with create and delete.
 
     This QML file defines the main UI for the first page of a notes application using the MVC pattern.
     It provides the following features:
@@ -40,6 +41,12 @@ Rectangle {
     id:firstPage
     width: parent.width
     height: parent.height
+
+    /**
+     * Emitted after a list has been selected, i.e. after
+     * todoModel.setNoteID() was called; main.qml then switches to the tasks
+     * page.
+     */
     signal elementClicked();
 
     ColumnLayout{
@@ -102,14 +109,17 @@ Rectangle {
                         height: createNewList.height
                         taskName: model.NoteName
                         showCheckBox: false
+                        // Remember the row and name, then ask for confirmation
                         removeButton.onClicked: {
-                            deleteListConfirmation.listIndex = index
+                            deleteListConfirmation.listId = model.NoteID
                             deleteListConfirmation.listName = model.NoteName
                             deleteListConfirmation.open()
                         }
+                        // Open this list: select it in todoModel (which reloads
+                        // its tasks), then notify the parent via elementClicked
                         elementMouse.onClicked: {
                             console.log()
-                            todoModel.setNoteID(model.NoteID)
+                            controller.openList(model.NoteID)
                             elementClicked()
                         }
                         Layout.fillWidth: true
@@ -119,6 +129,7 @@ Rectangle {
         }
     }
 
+    // Popup asking for the name of a new list; Save adds it if not blank
     ProfileConfirmPopup{
         id:nameConfirmationPopup
         width: parent.width*0.75
@@ -126,18 +137,20 @@ Rectangle {
         anchors.centerIn: parent
         saveButtonAlias.onClicked: {
             if (listNameField.text.trim() !== "") {
-                todoNotesModel.addNoteToList(listNameField.text.trim())
+                controller.addList(listNameField.text.trim())
             }
             nameConfirmationPopup.close()
         }
     }
+    // Confirmation for deleting a list. Note: deleting a list currently leaves
+    // its tasks in the database (known issue in TODONotesModel).
     DeleteConfirmation{
         id:deleteListConfirmation
         width: parent.width*0.75
         height: parent.height*0.5
         anchors.centerIn: parent
         onConfirmed: {
-            todoNotesModel.removeNoteFromList(deleteListConfirmation.listIndex)
+            controller.removeList(deleteListConfirmation.listId)
             deleteListConfirmation.close()
         }
     }

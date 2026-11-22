@@ -28,9 +28,9 @@ This project is a hobby application developed to demonstrate the practical imple
 ## Project Architecture
 
 ### MVC Pattern Implementation
-- **Model**: Handles data management and business logic
+- **Model**: `QAbstractListModel` classes (`TODONotesModel`, `ToDoListModel`, `EventLogsModel`) that load data from SQLite and present it to the view; they do not modify data
 - **View**: QML-based user interface components
-- **Controller**: Manages communication between Model and View
+- **Controller**: `Controller` (`controller.h/.cpp`) is the only place data changes. QML calls it (as `controller`); it writes through `DBManager`, records the audit event through `Logger`, then updates the models
 
 ### Singleton Pattern Usage
 The Singleton pattern is utilized for managing shared resources and ensuring single instance creation where necessary.

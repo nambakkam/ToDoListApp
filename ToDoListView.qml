@@ -1,3 +1,10 @@
+/**
+ * @file ToDoListView.qml
+ * @brief Page showing the tasks of the open list, with add, check and delete.
+ *
+ * Bound to the context property `todoModel` (ToDoListModel); the list shown
+ * is the one last selected with `todoModel.setNoteID()` from FirstPage.
+ */
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
@@ -44,13 +51,14 @@ Rectangle {
                         // Handler for remove button click
                         removeButton.onClicked: {
                             deleteListConfirmation.listName = model.ItemName
-                            deleteListConfirmation.listIndex = index
+                            deleteListConfirmation.listId = model.id
                             deleteListConfirmation.open()
                         }
 
-                        // Handler for checkbox state change
+                        // Handler for checkbox state change: persists the new
+                        // state through the model (row index, not a DB id)
                         checkBoxComp.onCheckedChanged: {
-                            todoModel.toggleTaskStatus(index,checkBoxComp.checked)
+                            controller.toggleTask(model.id, checkBoxComp.checked)
                         }
                     }
                 }
@@ -78,7 +86,7 @@ Rectangle {
                 text: "Add"
                 onClicked: {
                     if (newTaskField.text.trim() !== "") {
-                        todoModel.addItemToList(newTaskField.text)
+                        controller.addTask(newTaskField.text)
                         newTaskField.text = ""
                     }
                 }
@@ -86,15 +94,15 @@ Rectangle {
         }
     }
 
-    // Confirmation dialog for deleting a task
+    // Confirmation dialog for deleting a task (its text still says "list";
+    // listIndex here is the task's row in todoModel)
     DeleteConfirmation{
         id:deleteListConfirmation
         width: parent.width*0.75
         height: parent.height*0.5
         anchors.centerIn: parent
         onConfirmed: {
-            console.log("The index is ", listIndex)
-            todoModel.removeItemFromList(deleteListConfirmation.listIndex)
+            controller.removeTask(deleteListConfirmation.listId)
             deleteListConfirmation.close()
         }
     }

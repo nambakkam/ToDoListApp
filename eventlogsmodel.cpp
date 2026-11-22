@@ -1,3 +1,7 @@
+/**
+ * @file eventlogsmodel.cpp
+ * @brief Implements EventLogsModel (audit log read from `eventLogs`).
+ */
 #include "eventlogsmodel.h"
 #include "dbmanager.h"
 #include <QJsonDocument>

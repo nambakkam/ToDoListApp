@@ -1,3 +1,11 @@
+/**
+ * @file DeleteConfirmation.qml
+ * @brief Modal Yes/No popup confirming a deletion.
+ *
+ * Used for lists (FirstPage) and tasks (ToDoListView); the heading always
+ * reads "Delete List?". The popup does not delete anything itself and does
+ * not close on Yes: the owner handles `confirmed` and calls `close()`.
+ */
 import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.15
@@ -11,10 +19,12 @@ Popup {
     focus: true
     closePolicy: Popup.CloseOnPressOutside
 
-    // Properties to identify the list being deleted
-    property int listIndex: 0        // Index of the list to delete
-    property string listName: ""     // Name of the list to delete
-    signal confirmed()               // Emitted when user confirms deletion
+    /** Database id of the list/task to delete; set by the owner before open(). */
+    property int listId: -1
+    /** Name shown in the confirmation message. */
+    property string listName: ""
+    /** Emitted when the user presses Yes. */
+    signal confirmed()
 
     Rectangle {
         anchors.fill: parent

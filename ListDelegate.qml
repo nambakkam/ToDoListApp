@@ -1,3 +1,11 @@
+/**
+ * @file ListDelegate.qml
+ * @brief Reusable row: checkbox, name and remove icon.
+ *
+ * Used for tasks in ToDoListView (checkbox shown) and for lists in FirstPage
+ * (checkbox hidden through `showCheckBox`). The parent supplies the behavior
+ * by attaching handlers to the aliased items; the built-in handlers are empty.
+ */
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.0
@@ -7,15 +15,20 @@ Rectangle {
     width: parent.width
     height: width * 0.15
 
-    // Properties for item data and UI control
-    property string serialNumber: "1"         // Serial number of the task
-    property string taskName: "taskName"      // Name of the task
-    property bool completionStatus: false     // Completion status of the task
+    /** Task serial number (set to the model's `id`; not displayed here). */
+    property string serialNumber: "1"
+    /** Text shown in the middle of the row (task or list name). */
+    property string taskName: "taskName"
+    /** Completed flag: sets the checkbox and strikes the text through. */
+    property bool completionStatus: false
 
-    // Aliases for accessing child elements externally
+    /** The completion CheckBox (use `checked` / `onCheckedChanged`). */
     property alias checkBoxComp: completionStatusBox
+    /** The MouseArea over the remove icon (use `onClicked`). */
     property alias removeButton: removeClick
+    /** Visibility of the checkbox cell (hidden for lists on FirstPage). */
     property alias showCheckBox: checkBoxHolder.visible
+    /** The MouseArea covering the whole row (use `onClicked`). */
     property alias elementMouse: elementMouse
 
     color: "beige"

@@ -1,3 +1,11 @@
+/**
+ * @file main.qml
+ * @brief Root window: header plus a StackLayout that switches between pages.
+ *
+ * Page indexes of `pageSwitcher`: 0 FirstPage (lists), 1 ToDoListView (tasks
+ * of the open list), 2 LogsPage. Uses the context properties `eventLogsModel`
+ * (set in main.cpp).
+ */
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.15
@@ -26,12 +34,14 @@ Window {
         logsButton{
             onClicked: {
                 pageSwitcher.currentIndex = 2
-                eventLogsModel.refresh()
+                controller.showLogs()
             }
         }
     }
 
     // StackLayout for page navigation
+    // Holds the three pages; currentIndex selects the visible one
+    // (0 lists, 1 tasks, 2 logs)
     StackLayout{
         id:pageSwitcher
         width: parent.width

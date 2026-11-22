@@ -1,3 +1,7 @@
+/**
+ * @file logger.cpp
+ * @brief Implements Logger: builds the JSON description and stores events.
+ */
 #include "logger.h"
 #include "dbmanager.h"
 
@@ -36,9 +40,10 @@ QString Logger::eventTypeToString(Logger::EventType type) {
 /**
  * @brief Logs an event to the database with the specified type and details.
  *
- * This function prepares a JSON object containing the note name and, if provided,
- * the task name. It then converts the event type to a string and calls the database
- * manager to add the event log. The result of the operation is output to the debug log.
+ * This function prepares a compact JSON object containing "NoteName" and, if
+ * taskName is not empty, "TaskName". It then converts the event type to its
+ * enumerator name and calls DBManager::addEventLog(). Success or failure is
+ * only reported through qDebug(); the caller gets no result.
  *
  * @param type The type of the event to log.
  * @param noteName The name of the note associated with the event.

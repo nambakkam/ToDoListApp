@@ -11,6 +11,8 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Quick Sql)
 
 qt_add_executable(MVCPatternExample WIN32
   main.cpp
+  controller.cpp
+  controller.h
   dbmanager.cpp
   dbmanager.h
   eventlogsmodel.cpp
@@ -29,16 +31,9 @@ target_link_libraries(MVCPatternExample PRIVATE Qt6::Quick Qt6::Sql)
 # Uncomment once the build is clean to flag APIs deprecated before Qt 6.5.
 #target_compile_definitions(MVCPatternExample PRIVATE QT_DISABLE_DEPRECATED_BEFORE=0x060500)
 
-# DBManager reads ./schema/databaseTemplate.sql relative to the working
-# directory, which is the build-dir root when run from Qt Creator. Keep the
-# exe there and copy the schema next to it.
-set_target_properties(MVCPatternExample PROPERTIES
-  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}
-)
-add_custom_command(TARGET MVCPatternExample POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy_directory
-          ${CMAKE_SOURCE_DIR}/schema ${CMAKE_BINARY_DIR}/schema
-)
+# schema/databaseTemplate.sql is compiled into the executable through qml.qrc
+# (read as :/schema/databaseTemplate.sql), so no post-build copy is needed.
+# database.db is created in the working directory.
 
 include(GNUInstallDirs)
 install(TARGETS MVCPatternExample
@@ -46,4 +41,11 @@ install(TARGETS MVCPatternExample
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
-install(DIRECTORY schema DESTINATION ${CMAKE_INSTALL_BINDIR})
+
+# Qt Test suite: one executable per class, because DBManager is a singleton
+# that cannot be reset within a process.
+option(BUILD_TESTING "Build the Qt Test suite" ON)
+if(BUILD_TESTING)
+  enable_testing()
+  add_subdirectory(tests)
+endif()
