@@ -1,3 +1,12 @@
+/**
+ * @file LogsPage.qml
+ * @brief Page listing the audit log, newest first.
+ *
+ * A ListView over the context property `eventLogsModel` (EventLogsModel).
+ * The delegate uses the roles `eventType`, `noteName`, `taskName` and
+ * `timestamp`. The model is only reloaded by `eventLogsModel.refresh()`,
+ * which main.qml calls when the Logs button is pressed.
+ */
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15

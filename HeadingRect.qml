@@ -1,3 +1,10 @@
+/**
+ * @file HeadingRect.qml
+ * @brief App header bar with a back button, icon, title and Logs button.
+ *
+ * The buttons' click behavior is supplied by the parent (main.qml) through the
+ * `backButton` and `logsButton` aliases; the defaults only log to the console.
+ */
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
@@ -9,8 +16,9 @@ Rectangle {
     height: parent.height * 0.1
     color: "#7ADAA5"
 
-    // Expose buttons as properties for external access
+    /** The back button (hidden by default; main.qml shows it off page 0). */
     property alias backButton: backButton
+    /** The Logs button (visible by default). */
     property alias logsButton: logsButton
 
     // Layout for header contents

@@ -1,3 +1,11 @@
+/**
+ * @file ProfileConfirmPopup.qml
+ * @brief Modal popup asking for the name of a new list.
+ *
+ * Despite the file name it has nothing to do with profiles. The Save button's
+ * default handler only logs the text; the owner (FirstPage) overrides it via
+ * `saveButtonAlias`. The field is cleared on close and focused on open.
+ */
 import QtQuick 2.15
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.15
@@ -11,8 +19,9 @@ Popup {
     modal: true
     focus: true
 
-    // Expose save button and text field as aliases
+    /** The Save button (attach `onClicked` to act on the entered name). */
     property alias saveButtonAlias: saveButton
+    /** The name TextField (read `text`). */
     property alias listNameField: listNameInput
 
     Rectangle {
