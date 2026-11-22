@@ -1,3 +1,7 @@
+/**
+ * @file todolistmodel.cpp
+ * @brief Implements ToDoListModel (tasks of the currently open list).
+ */
 #include "todolistmodel.h"
 #include "dbmanager.h"
 ToDoListModel::ToDoListModel(QObject *parent)
@@ -165,7 +169,9 @@ bool ToDoListModel::setStatusById(int id, bool status) {
  * and populates the model with the fetched items. Each item includes its ID, content,
  * and completion status.
  *
- * The model is reset before and after updating to ensure proper notification of views.
+ * The query runs first; the model is then reset (beginResetModel()/
+ * endResetModel()) around the clear-and-refill so views are notified.
+ * Also runs automatically whenever noteIDChanged() is emitted.
  */
 void ToDoListModel::fetchListFromDB() {
   QList<QVariantMap> list = DBManager::instance()->getNoteContents(m_noteID);

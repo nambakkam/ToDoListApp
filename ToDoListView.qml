@@ -1,3 +1,10 @@
+/**
+ * @file ToDoListView.qml
+ * @brief Page showing the tasks of the open list, with add, check and delete.
+ *
+ * Bound to the context property `todoModel` (ToDoListModel); the list shown
+ * is the one last selected with `todoModel.setNoteID()` from FirstPage.
+ */
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
@@ -48,7 +55,8 @@ Rectangle {
                             deleteListConfirmation.open()
                         }
 
-                        // Handler for checkbox state change
+                        // Handler for checkbox state change: persists the new
+                        // state through the model (row index, not a DB id)
                         checkBoxComp.onCheckedChanged: {
                             controller.toggleTask(model.id, checkBoxComp.checked)
                         }
@@ -86,7 +94,8 @@ Rectangle {
         }
     }
 
-    // Confirmation dialog for deleting a task
+    // Confirmation dialog for deleting a task (its text still says "list";
+    // listIndex here is the task's row in todoModel)
     DeleteConfirmation{
         id:deleteListConfirmation
         width: parent.width*0.75

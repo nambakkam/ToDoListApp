@@ -1,3 +1,9 @@
+/**
+ * @file dbmanager.cpp
+ * @brief Implements DBManager: SQLite open/schema setup and the queries for
+ *        lists (`Notes`), tasks (`NotesContents`) and audit logs
+ *        (`eventLogs`).
+ */
 #include "dbmanager.h"
 #include <QFile>
 DBManager *DBManager::m_instance = nullptr;
@@ -14,7 +20,8 @@ DBManager::DBManager(QObject *parent) : QObject(parent) {
  * This method implements the double-checked locking pattern to ensure that
  * only one instance of DBManager is created in a thread-safe manner.
  * If the instance does not exist, it acquires a mutex lock and creates
- * the instance.
+ * the instance. (The first, unlocked check reads a plain pointer, so this is
+ * not a strictly race-free double-checked locking implementation.)
  *
  * @return Pointer to the singleton DBManager instance.
  */
@@ -39,6 +46,10 @@ DBManager *DBManager::instance() {
  *
  * @note The database connection must be open before calling this function.
  *       If any statement fails to execute, the function returns false and logs the error.
+ *       Because of the naive split on ';', the file may only contain plain
+ *       statements (no triggers, no ';' inside literals). It runs on every
+ *       start-up, so statements must be idempotent (CREATE TABLE IF NOT EXISTS).
+ *       A missing file only produces a qDebug() message and a false return.
  */
 bool DBManager::createTablesFromFile(const QString &sqlFilePath) {
   if (!m_db.isOpen()) {
@@ -151,7 +162,8 @@ bool DBManager::updateNoteTitle(int noteId, const QString &newTitle) {
 /**
  * @brief Retrieves all notes from the database.
  *
- * Executes a SQL query to select all records from the Notes table,
+ * Executes a SQL query to select all records from the Notes table (the
+ * lists shown on the home page),
  * ordered by the creation date in descending order. Each note is
  * represented as a QVariantMap containing the note's ID, title,
  * and creation timestamp.
@@ -177,6 +189,9 @@ QList<QVariantMap> DBManager::getAllNotes() {
  *
  * This function prepares and executes a SQL DELETE statement to remove
  * the note with the specified noteId from the Notes table.
+ *
+ * @note Rows in NotesContents that belong to the note are not removed (no
+ *       cascade, no foreign keys).
  *
  * @param noteId The unique identifier of the note to be deleted.
  * @return true if the note was successfully deleted; false otherwise.
