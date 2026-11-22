@@ -34,7 +34,7 @@ Window {
         logsButton{
             onClicked: {
                 pageSwitcher.currentIndex = 2
-                eventLogsModel.refresh()
+                controller.showLogs()
             }
         }
     }

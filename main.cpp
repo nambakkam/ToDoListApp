@@ -1,7 +1,9 @@
 /**
  * @file main.cpp
- * @brief Application entry point: creates the models and loads the QML UI.
+ * @brief Application entry point: creates the models and the Controller and
+ *        loads the QML UI.
  */
+#include "controller.h"
 #include "dbmanager.h"
 #include "eventlogsmodel.h"
 #include "todolistmodel.h"
@@ -19,8 +21,9 @@
  * models are stack-allocated: ToDoListModel (tasks), TODONotesModel (lists)
  * and EventLogsModel (audit log; it loads itself on construction). The lists
  * are fetched explicitly, then the models are exposed to QML as the context
- * properties `todoModel`, `todoNotesModel` and `eventLogsModel`, and
- * `qrc:/main.qml` is loaded. If that root object fails to load, the
+ * properties `todoModel`, `todoNotesModel` and `eventLogsModel`. The
+ * Controller, which performs all data changes, is created from the three
+ * models and exposed as `controller`. Then `qrc:/main.qml` is loaded. If that root object fails to load, the
  * application exits with code -1.
  *
  * @param argc Number of command-line arguments.
@@ -38,7 +41,9 @@ int main(int argc, char *argv[]) {
   TODONotesModel todoNotesModel;
   EventLogsModel logsModel;
   todoNotesModel.fetchAllNotesFromDB();
+  Controller controller(&todoModel, &todoNotesModel, &logsModel);
   QQmlApplicationEngine engine;
+  engine.rootContext()->setContextProperty("controller", &controller);
   engine.rootContext()->setContextProperty("todoModel", &todoModel);
   engine.rootContext()->setContextProperty("todoNotesModel", &todoNotesModel);
   engine.rootContext()->setContextProperty("eventLogsModel", &logsModel);

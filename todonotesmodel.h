@@ -24,12 +24,14 @@ struct notesElement {
  * @class TODONotesModel
  * @brief Model of all lists (exposed to QML as `todoNotesModel`).
  *
- * "Note" in the code means "list" in the UI; the tasks of a list are handled
- * by ToDoListModel. Adding re-fetches the lists from the database and resets
- * the model; removing updates the in-memory vector in place. Each mutating
- * method also records an event through Logger.
+ * This class inherits from QAbstractListModel and provides an interface for storing,
+ * retrieving, and displaying TODO notes. It supports custom roles for note ID, item name,
+ * and timestamp, and can reload from the database or drop a note by id. It does
+ * not write to the database or the event log; mutations go through Controller.
  *
  * QML role names: `NoteID`, `NoteName`, `CreatedAt`.
+ *
+ * @see Controller
  *
  * @see QAbstractListModel
  */
@@ -92,34 +94,14 @@ public:
   Q_INVOKABLE virtual QHash<int, QByteArray> roleNames() const override;
 
   /**
-   * @brief Creates a list.
-   *
-   * Inserts it with DBManager::addNote(), re-fetches all lists (model reset)
-   * and logs NOTE_CREATED. The id returned by the insert is not checked.
-   *
-   * @param data Name of the new list.
-   */
-  Q_INVOKABLE void addNoteToList(const QString &data);
-
-  /**
-   * @brief Deletes a list.
-   *
-   * Logs NOTE_DELETED, deletes the `Notes` row and removes the row from the
-   * model. @warning Known bug: the tasks of the list are NOT deleted. The
-   * code calls getNoteContents() and discards the result instead of
-   * DBManager::deleteAllNoteContents(), so the tasks stay in `NotesContents`.
-   * Also, modelData.at(index) is read without a bounds check.
-   *
-   * @param index Row of the list in the model (not its database id).
-   */
-  Q_INVOKABLE void removeNoteFromList(const int &index);
-
-  /**
    * @brief Reloads all lists from the database (newest first).
    *
    * Resets the model. Called once from main() at start-up and after each add.
    */
   Q_INVOKABLE void fetchAllNotesFromDB();
+
+  // In-memory helper used by Controller after it has written to the DB.
+  bool removeById(int id);
 
 private:
   /** @brief In-memory lists, in the order returned by the database. */

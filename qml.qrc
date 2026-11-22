@@ -10,5 +10,6 @@
         <file>ProfileConfirmPopup.qml</file>
         <file>DeleteConfirmation.qml</file>
         <file>LogsPage.qml</file>
+        <file>schema/databaseTemplate.sql</file>
     </qresource>
 </RCC>

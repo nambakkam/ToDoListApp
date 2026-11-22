@@ -4,7 +4,6 @@
  */
 #include "todolistmodel.h"
 #include "dbmanager.h"
-#include "logger.h"
 ToDoListModel::ToDoListModel(QObject *parent)
     : QAbstractListModel{parent}, m_noteID{-1} {
   Q_UNUSED(parent);
@@ -107,71 +106,61 @@ QHash<int, QByteArray> ToDoListModel::roleNames() const {
 }
 
 /**
- * @brief Adds a new item to the to-do list and updates the model.
+ * @brief Returns the name of the task with the given database id.
  *
- * This method inserts a new note content into the database for the current note ID,
- * logs the addition event, and refreshes the list from the database.
- *
- * @param data The content of the item to be added to the to-do list.
+ * @param id The task (note content) id.
+ * @return The task name, or an empty string if no such task is loaded.
  */
-void ToDoListModel::addItemToList(const QString &data) {
-  DBManager::instance()->addNoteContent(m_noteID, data);
-  QString noteName = DBManager::instance()->getNoteName(m_noteID);
-  Logger::instance().logEvent(Logger::TASK_ADDED, noteName, data);
-  fetchListFromDB();
+QString ToDoListModel::itemNameById(int id) const {
+  for (const auto &item : modelData) {
+    if (item.id == id)
+      return item.itemName;
+  }
+  return QString();
 }
 
 /**
- * @brief Removes an item from the to-do list at the specified index.
+ * @brief Removes the task with the given database id from the in-memory list.
  *
- * This function deletes the note content from the database, logs the deletion event,
- * and removes the item from the internal model data.
+ * Only updates the model; the caller is responsible for deleting the row
+ * from the database.
  *
- * @warning The row is read with modelData.at(index) before the bounds check,
- * so an out-of-range index is undefined behavior (QVector::at() only asserts
- * in Qt debug builds); the later bounds check only guards the in-memory removal
- * (the database delete and the log entry have already happened by then).
- *
- * @param index The index of the item to be removed from the list.
+ * @param id The task (note content) id.
+ * @return true if a row was removed, false if no such task is loaded.
  */
-void ToDoListModel::removeItemFromList(const int &index) {
-  int eventID = modelData.at(index).id;
-  DBManager::instance()->deleteNoteContent(eventID);
-  QString noteName = DBManager::instance()->getNoteName(m_noteID);
-  Logger::instance().logEvent(Logger::TASK_DELETED, noteName,
-                              modelData.at(index).itemName);
-  if (index < 0 || index >= modelData.size())
-    return;
-  beginRemoveRows(QModelIndex(), index, index);
-  modelData.removeAt(index);
-  endRemoveRows();
+bool ToDoListModel::removeById(int id) {
+  for (int row = 0; row < modelData.size(); ++row) {
+    if (modelData.at(row).id == id) {
+      beginRemoveRows(QModelIndex(), row, row);
+      modelData.removeAt(row);
+      endRemoveRows();
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
- * @brief Toggles the completion status of a task at the specified index.
+ * @brief Sets the completion status of the task with the given id in memory.
  *
- * Updates the task's status both in the local model and the database.
- * Logs the status change event (the new state is appended to the task name as
- * ":0" or ":1") and emits dataChanged() for StatusRole.
+ * Only updates the model and notifies views; the caller is responsible for
+ * persisting the change.
  *
- * @warning As in removeItemFromList(), modelData.at(index) is evaluated before
- * the bounds check, so the check does not protect the database update.
- *
- * @param index The index of the task in the model.
- * @param status The new completion status to set for the task.
+ * @param id The task (note content) id.
+ * @param status The new completion status.
+ * @return true if the task was found, false otherwise.
  */
-void ToDoListModel::toggleTaskStatus(const int &index, const bool &status) {
-  int eventID = modelData.at(index).id;
-  DBManager::instance()->updateNoteContent(eventID, status);
-  QString noteName = DBManager::instance()->getNoteName(m_noteID);
-  Logger::instance().logEvent(Logger::TASK_STATUS_TOGGLED, noteName,
-                              modelData.at(index).itemName +
-                                  QString(":%1").arg(status));
-  if (index < 0 || index >= modelData.size())
-    return;
-  modelData[index].completionStatus = status;
-  emit dataChanged(this->index(index), this->index(index), {StatusRole});
+bool ToDoListModel::setStatusById(int id, bool status) {
+  for (int row = 0; row < modelData.size(); ++row) {
+    if (modelData.at(row).id == id) {
+      modelData[row].completionStatus = status;
+      emit dataChanged(index(row), index(row), {StatusRole});
+      return true;
+    }
+  }
+  return false;
 }
+
 /**
  * @brief Fetches the to-do list items from the database and updates the model.
  *

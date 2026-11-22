@@ -111,7 +111,7 @@ Rectangle {
                         showCheckBox: false
                         // Remember the row and name, then ask for confirmation
                         removeButton.onClicked: {
-                            deleteListConfirmation.listIndex = index
+                            deleteListConfirmation.listId = model.NoteID
                             deleteListConfirmation.listName = model.NoteName
                             deleteListConfirmation.open()
                         }
@@ -119,7 +119,7 @@ Rectangle {
                         // its tasks), then notify the parent via elementClicked
                         elementMouse.onClicked: {
                             console.log()
-                            todoModel.setNoteID(model.NoteID)
+                            controller.openList(model.NoteID)
                             elementClicked()
                         }
                         Layout.fillWidth: true
@@ -137,7 +137,7 @@ Rectangle {
         anchors.centerIn: parent
         saveButtonAlias.onClicked: {
             if (listNameField.text.trim() !== "") {
-                todoNotesModel.addNoteToList(listNameField.text.trim())
+                controller.addList(listNameField.text.trim())
             }
             nameConfirmationPopup.close()
         }
@@ -150,7 +150,7 @@ Rectangle {
         height: parent.height*0.5
         anchors.centerIn: parent
         onConfirmed: {
-            todoNotesModel.removeNoteFromList(deleteListConfirmation.listIndex)
+            controller.removeList(deleteListConfirmation.listId)
             deleteListConfirmation.close()
         }
     }

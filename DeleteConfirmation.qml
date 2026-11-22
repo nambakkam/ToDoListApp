@@ -19,8 +19,8 @@ Popup {
     focus: true
     closePolicy: Popup.CloseOnPressOutside
 
-    /** Model row of the item to delete; set by the owner before open(). */
-    property int listIndex: 0
+    /** Database id of the list/task to delete; set by the owner before open(). */
+    property int listId: -1
     /** Name shown in the confirmation message. */
     property string listName: ""
     /** Emitted when the user presses Yes. */

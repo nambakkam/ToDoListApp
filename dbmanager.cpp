@@ -11,7 +11,7 @@ QMutex DBManager::m_mutex;
 
 DBManager::DBManager(QObject *parent) : QObject(parent) {
   openDB("./database.db");
-  createTablesFromFile("./schema/databaseTemplate.sql");
+  createTablesFromFile(":/schema/databaseTemplate.sql");
 }
 
 /**

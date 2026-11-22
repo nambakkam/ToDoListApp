@@ -51,14 +51,14 @@ Rectangle {
                         // Handler for remove button click
                         removeButton.onClicked: {
                             deleteListConfirmation.listName = model.ItemName
-                            deleteListConfirmation.listIndex = index
+                            deleteListConfirmation.listId = model.id
                             deleteListConfirmation.open()
                         }
 
                         // Handler for checkbox state change: persists the new
                         // state through the model (row index, not a DB id)
                         checkBoxComp.onCheckedChanged: {
-                            todoModel.toggleTaskStatus(index,checkBoxComp.checked)
+                            controller.toggleTask(model.id, checkBoxComp.checked)
                         }
                     }
                 }
@@ -86,7 +86,7 @@ Rectangle {
                 text: "Add"
                 onClicked: {
                     if (newTaskField.text.trim() !== "") {
-                        todoModel.addItemToList(newTaskField.text)
+                        controller.addTask(newTaskField.text)
                         newTaskField.text = ""
                     }
                 }
@@ -102,8 +102,7 @@ Rectangle {
         height: parent.height*0.5
         anchors.centerIn: parent
         onConfirmed: {
-            console.log("The index is ", listIndex)
-            todoModel.removeItemFromList(deleteListConfirmation.listIndex)
+            controller.removeTask(deleteListConfirmation.listId)
             deleteListConfirmation.close()
         }
     }
