@@ -34,27 +34,5 @@ HEADERS += \
     todolistmodel.h \
     todonotesmodel.h
 
-# --- Place this at the very end of your .pro ---
-defineReplace(toWindowsPath) {
-    result = $$1
-    result ~= s,/,\\,g
-    return($$result)
-}
-
-SCHEMA_DIR = $$toWindowsPath($$PWD)\schema
-DEST_SCHEMA_DIR = $$toWindowsPath($$OUT_PWD)\schema
-
-
-message($$SCHEMA_DIR)
-message($$DEST_SCHEMA_DIR)
-
-# Make sure the schema folder exists in build dir
-#QMAKE_POST_LINK += $$QMAKE_MKDIR_CMD $$DEST_SCHEMA_DIR $$escape_expand(\\n\\t)
-#message($$QMAKE_MKDIR_CMD $$DEST_SCHEMA_DIR $$escape_expand(\\n\\t))
-## Copy schema files after build
-QMAKE_POST_LINK += $$QMAKE_COPY_DIR $$SCHEMA_DIR $$DEST_SCHEMA_DIR
-#message($$QMAKE_COPY_DIR $$SCHEMA_DIR $$DEST_SCHEMA_DIR)
-
-
-
-
+# schema/databaseTemplate.sql is compiled into the executable through qml.qrc
+# (read as :/schema/databaseTemplate.sql), so no post-link copy step is needed.
