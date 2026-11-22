@@ -1,3 +1,7 @@
+/**
+ * @file todolistmodel.cpp
+ * @brief Implements ToDoListModel (tasks of the currently open list).
+ */
 #include "todolistmodel.h"
 #include "dbmanager.h"
 #include "logger.h"
@@ -121,8 +125,12 @@ void ToDoListModel::addItemToList(const QString &data) {
  * @brief Removes an item from the to-do list at the specified index.
  *
  * This function deletes the note content from the database, logs the deletion event,
- * and removes the item from the internal model data. If the index is out of bounds,
- * the function returns without making any changes.
+ * and removes the item from the internal model data.
+ *
+ * @warning The row is read with modelData.at(index) before the bounds check,
+ * so an out-of-range index is undefined behavior (QVector::at() only asserts
+ * in Qt debug builds); the later bounds check only guards the in-memory removal
+ * (the database delete and the log entry have already happened by then).
  *
  * @param index The index of the item to be removed from the list.
  */
@@ -143,7 +151,11 @@ void ToDoListModel::removeItemFromList(const int &index) {
  * @brief Toggles the completion status of a task at the specified index.
  *
  * Updates the task's status both in the local model and the database.
- * Logs the status change event and emits a signal to notify views of the data change.
+ * Logs the status change event (the new state is appended to the task name as
+ * ":0" or ":1") and emits dataChanged() for StatusRole.
+ *
+ * @warning As in removeItemFromList(), modelData.at(index) is evaluated before
+ * the bounds check, so the check does not protect the database update.
  *
  * @param index The index of the task in the model.
  * @param status The new completion status to set for the task.
@@ -168,7 +180,9 @@ void ToDoListModel::toggleTaskStatus(const int &index, const bool &status) {
  * and populates the model with the fetched items. Each item includes its ID, content,
  * and completion status.
  *
- * The model is reset before and after updating to ensure proper notification of views.
+ * The query runs first; the model is then reset (beginResetModel()/
+ * endResetModel()) around the clear-and-refill so views are notified.
+ * Also runs automatically whenever noteIDChanged() is emitted.
  */
 void ToDoListModel::fetchListFromDB() {
   QList<QVariantMap> list = DBManager::instance()->getNoteContents(m_noteID);

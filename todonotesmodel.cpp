@@ -1,3 +1,7 @@
+/**
+ * @file todonotesmodel.cpp
+ * @brief Implements TODONotesModel (the lists shown on the home page).
+ */
 #include "todonotesmodel.h"
 #include "dbmanager.h"
 #include "logger.h"
@@ -36,7 +40,9 @@ int TODONotesModel::rowCount(const QModelIndex &parent) const {
  *
  * @param index The QModelIndex specifying the row and column of the item.
  * @param role The role for which the data is requested.
- * @return QVariant containing the requested data, or an invalid QVariant if the index is not valid or the role is not recognized.
+ * @return QVariant containing the requested data. An unrecognized role gives an
+ *         invalid QVariant, but an invalid or out-of-range index gives
+ *         QVariant(0) (an integer zero).
  */
 QVariant TODONotesModel::data(const QModelIndex &index, int role) const {
   if (!index.isValid() || index.row() >= modelData.count()) {
@@ -110,7 +116,8 @@ QHash<int, QByteArray> TODONotesModel::roleNames() const {
  * After insertion, it refreshes the model data from the database to reflect the changes.
  * Additionally, it logs the creation event for auditing purposes.
  *
- * @param data The content of the note to be added.
+ * @param data The name of the new list (note). The insert result is stored in
+ *        a local variable that is not used afterwards.
  */
 void TODONotesModel::addNoteToList(const QString &data) {
   int eventID = DBManager::instance()->addNote(data);
@@ -129,9 +136,14 @@ void TODONotesModel::addNoteToList(const QString &data) {
 /**
  * @brief Removes a note from the model and the database.
  *
- * This function deletes the note at the specified index from both the internal model data
- * and the persistent database. It also logs the deletion event. The function emits the necessary
- * signals to update any views associated with the model.
+ * This function logs the deletion event, deletes the note (list) at the
+ * specified index from the database and then removes it from the internal
+ * model data, notifying views with beginRemoveRows()/endRemoveRows().
+ *
+ * @warning Known bug: the list's tasks are not deleted. After deleteNote() the
+ * code calls DBManager::getNoteContents() and discards the result;
+ * DBManager::deleteAllNoteContents() is never called, so the rows stay in
+ * NotesContents. Also, modelData.at(index) is read without a bounds check.
  *
  * @param index The index of the note to be removed.
  */
@@ -152,7 +164,8 @@ void TODONotesModel::removeNoteFromList(const int &index) {
  * This method retrieves all notes from the database using DBManager,
  * clears the current model data, and repopulates it with the fetched notes.
  * The model is reset before and after the update to ensure proper notification
- * of changes to any attached views.
+ * of changes to any attached views. `created_at` is converted with
+ * QDateTime::fromString() using its default format.
  */
 void TODONotesModel::fetchAllNotesFromDB() {
   QList<QVariantMap> list;

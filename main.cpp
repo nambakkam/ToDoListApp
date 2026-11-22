@@ -1,3 +1,7 @@
+/**
+ * @file main.cpp
+ * @brief Application entry point: creates the models and loads the QML UI.
+ */
 #include "dbmanager.h"
 #include "eventlogsmodel.h"
 #include "todolistmodel.h"
@@ -9,11 +13,15 @@
 /**
  * @brief Entry point for the MVCPatternExample Qt application.
  *
- * Initializes the Qt application, sets up high DPI scaling for Qt versions below 6,
- * creates and initializes the database manager, models for ToDo list, notes, and event logs,
- * and fetches all notes from the database. Sets up the QML application engine,
- * exposes the models to QML context, and loads the main QML file.
- * Handles application exit if the QML root object fails to load.
+ * Enables high DPI scaling for Qt versions below 6, creates the
+ * QGuiApplication, then DBManager::instance() (which opens `./database.db`
+ * and runs the schema file relative to the working directory). The three
+ * models are stack-allocated: ToDoListModel (tasks), TODONotesModel (lists)
+ * and EventLogsModel (audit log; it loads itself on construction). The lists
+ * are fetched explicitly, then the models are exposed to QML as the context
+ * properties `todoModel`, `todoNotesModel` and `eventLogsModel`, and
+ * `qrc:/main.qml` is loaded. If that root object fails to load, the
+ * application exits with code -1.
  *
  * @param argc Number of command-line arguments.
  * @param argv Array of command-line argument strings.
