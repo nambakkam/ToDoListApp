@@ -15,7 +15,7 @@ This project is a hobby application developed to demonstrate the practical imple
 
 - C++ & QT
 - QML 
-- QMake
+- CMake
 
 ## Features
 
@@ -37,8 +37,9 @@ The Singleton pattern is utilized for managing shared resources and ensuring sin
 
 ## Prerequisites
 
-- Qt Framework (version 5.12 or higher)
-- C++ compiler supporting C++11 or later
+- Qt Framework (version 6.5.3 or higher)
+- C++ compiler supporting C++17 or later
+- CMake 3.16 or later
 - Qt Creator IDE (recommended)
 
 ## Building the Project
@@ -51,7 +52,7 @@ cd ToDoListApp
 
 2. Open the project in Qt Creator:
 - Launch Qt Creator
-- Open the project file (`.pro` file)
+- Open `CMakeLists.txt` and select a Qt 6.5.3 kit
 - Configure the project with appropriate kit
 - Build and run
 
