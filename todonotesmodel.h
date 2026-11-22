@@ -28,10 +28,13 @@ struct notesElement {
  * @brief Model class for managing a list of TODO notes in a Qt MVC application.
  *
  * This class inherits from QAbstractListModel and provides an interface for storing,
- * retrieving, and manipulating TODO notes. It supports custom roles for note ID, item name,
- * and timestamp, and exposes methods for adding, removing, and fetching notes.
+ * retrieving, and displaying TODO notes. It supports custom roles for note ID, item name,
+ * and timestamp, and can reload from the database or drop a note by id. It does
+ * not write to the database or the event log; mutations go through Controller.
  *
  * @note The model uses a QVector of notesElement to store its data.
+ *
+ * @see Controller
  *
  * @see QAbstractListModel
  */
@@ -50,9 +53,10 @@ public:
   headerData(int section, Qt::Orientation orientation,
              int role = Qt::DisplayRole) const override;
   Q_INVOKABLE virtual QHash<int, QByteArray> roleNames() const override;
-  Q_INVOKABLE void addNoteToList(const QString &data);
-  Q_INVOKABLE void removeNoteFromList(const int &index);
   Q_INVOKABLE void fetchAllNotesFromDB();
+
+  // In-memory helper used by Controller after it has written to the DB.
+  bool removeById(int id);
 
 private:
   QVector<notesElement> modelData;

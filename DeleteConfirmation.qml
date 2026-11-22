@@ -12,7 +12,7 @@ Popup {
     closePolicy: Popup.CloseOnPressOutside
 
     // Properties to identify the list being deleted
-    property int listIndex: 0        // Index of the list to delete
+    property int listId: -1          // Database id of the list/task to delete
     property string listName: ""     // Name of the list to delete
     signal confirmed()               // Emitted when user confirms deletion
 

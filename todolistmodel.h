@@ -32,12 +32,15 @@ struct listElement {
  *
  * Inherits from QAbstractListModel and provides an interface for storing,
  * retrieving, and manipulating to-do list items. Supports custom roles for
- * item ID, name, and status. Exposes methods for adding, removing, toggling
- * task status, and fetching data from a database. Integrates with Qt's
- * meta-object system for use in QML and signal-slot communication.
+ * item ID, name, and status. Reads its data from the database and exposes
+ * id-based helpers to update the in-memory list. It does not write to the
+ * database or the event log; mutations go through Controller. Integrates with
+ * Qt's meta-object system for use in QML and signal-slot communication.
  *
- * @note This class is intended to be used as the model in a Model-View-Controller
- * (MVC) pattern, typically with a QListView or similar view component.
+ * @note This class is the read-only model in the Model-View-Controller (MVC)
+ * pattern; Controller performs the writes.
+ *
+ * @see Controller
  *
  * @see QAbstractListModel
  */
@@ -56,12 +59,12 @@ public:
   headerData(int section, Qt::Orientation orientation,
              int role = Qt::DisplayRole) const override;
   Q_INVOKABLE virtual QHash<int, QByteArray> roleNames() const override;
-  Q_INVOKABLE void addItemToList(const QString &data);
-  Q_INVOKABLE void removeItemFromList(const int &index);
-
-  Q_INVOKABLE void toggleTaskStatus(const int &index, const bool &status);
-
   Q_INVOKABLE void fetchListFromDB();
+
+  // In-memory helpers used by Controller after it has written to the DB.
+  QString itemNameById(int id) const;
+  bool removeById(int id);
+  bool setStatusById(int id, bool status);
 
 public slots:
   void setNoteID(const int &val);

@@ -1,3 +1,4 @@
+#include "controller.h"
 #include "dbmanager.h"
 #include "eventlogsmodel.h"
 #include "todolistmodel.h"
@@ -11,8 +12,9 @@
  *
  * Initializes the Qt application, sets up high DPI scaling for Qt versions below 6,
  * creates and initializes the database manager, models for ToDo list, notes, and event logs,
- * and fetches all notes from the database. Sets up the QML application engine,
- * exposes the models to QML context, and loads the main QML file.
+ * and fetches all notes from the database. Creates the Controller that performs
+ * all data changes. Sets up the QML application engine, exposes the models and
+ * the controller to QML context, and loads the main QML file.
  * Handles application exit if the QML root object fails to load.
  *
  * @param argc Number of command-line arguments.
@@ -30,7 +32,9 @@ int main(int argc, char *argv[]) {
   TODONotesModel todoNotesModel;
   EventLogsModel logsModel;
   todoNotesModel.fetchAllNotesFromDB();
+  Controller controller(&todoModel, &todoNotesModel, &logsModel);
   QQmlApplicationEngine engine;
+  engine.rootContext()->setContextProperty("controller", &controller);
   engine.rootContext()->setContextProperty("todoModel", &todoModel);
   engine.rootContext()->setContextProperty("todoNotesModel", &todoNotesModel);
   engine.rootContext()->setContextProperty("eventLogsModel", &logsModel);

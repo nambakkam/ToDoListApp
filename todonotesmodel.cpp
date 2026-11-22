@@ -1,6 +1,5 @@
 #include "todonotesmodel.h"
 #include "dbmanager.h"
-#include "logger.h"
 #include <QDateTime>
 TODONotesModel::TODONotesModel(QAbstractListModel *parent)
     : QAbstractListModel{parent} {
@@ -104,46 +103,24 @@ QHash<int, QByteArray> TODONotesModel::roleNames() const {
 }
 
 /**
- * @brief Adds a new note to the list and updates the model.
+ * @brief Removes the note with the given database id from the in-memory list.
  *
- * This function creates a new note with the given data by inserting it into the database.
- * After insertion, it refreshes the model data from the database to reflect the changes.
- * Additionally, it logs the creation event for auditing purposes.
+ * Only updates the model; the caller is responsible for deleting the note
+ * from the database.
  *
- * @param data The content of the note to be added.
+ * @param id The note id.
+ * @return true if a row was removed, false if no such note is loaded.
  */
-void TODONotesModel::addNoteToList(const QString &data) {
-  int eventID = DBManager::instance()->addNote(data);
-  //  beginInsertRows(QModelIndex(), rowCount(), rowCount());
-  //  notesElement element;
-  //  element.id = eventID;
-  //  element.itemName = data;
-  //  element.creationTime = QDateTime::currentDateTime();
-  //  modelData.append(element);
-  //  endInsertRows();
-  fetchAllNotesFromDB();
-  Logger::instance().logEvent(Logger::NOTE_CREATED, data);
-}
-
-
-/**
- * @brief Removes a note from the model and the database.
- *
- * This function deletes the note at the specified index from both the internal model data
- * and the persistent database. It also logs the deletion event. The function emits the necessary
- * signals to update any views associated with the model.
- *
- * @param index The index of the note to be removed.
- */
-void TODONotesModel::removeNoteFromList(const int &index) {
-  int eventID = modelData.at(index).id;
-  Logger::instance().logEvent(Logger::NOTE_DELETED,
-                              modelData.at(index).itemName);
-  DBManager::instance()->deleteNote(eventID);
-  DBManager::instance()->getNoteContents(eventID);
-  beginRemoveRows(QModelIndex(), index, index);
-  modelData.removeAt(index);
-  endRemoveRows();
+bool TODONotesModel::removeById(int id) {
+  for (int row = 0; row < modelData.size(); ++row) {
+    if (modelData.at(row).id == id) {
+      beginRemoveRows(QModelIndex(), row, row);
+      modelData.removeAt(row);
+      endRemoveRows();
+      return true;
+    }
+  }
+  return false;
 }
 
 /**
